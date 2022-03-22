@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/22 16:14:33 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/03/22 18:45:32 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "libs/libft/libft.h"
-//#include "executor/executor.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <readline/readline.h>
+# include "libs/libft/libft.h"
+# include "utils.h"
+//# include "executor/executor.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <readline/readline.h>
 
 /* Command data */
-typedef struct	s_command
+typedef struct s_command
 {
 	t_list	**commands;
 	char	**paths;
@@ -29,14 +30,14 @@ typedef struct	s_command
 }			t_command;
 
 /* Eviromental data */
-typedef struct	s_envp_data
+typedef struct s_envp_data
 {
-	t_list	**envp_cp; /* Copy of enviroment */
+	t_list	**envp_cp;
 	t_list	*pwd_list;
 }				t_envp_data;
 
 /* Main data struct */
-typedef struct	s_data
+typedef struct s_data
 {
 	t_envp_data	envp_data;
 	t_command	command;

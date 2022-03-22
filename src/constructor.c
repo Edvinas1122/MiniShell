@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/22 15:39:38 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/03/22 17:37:16 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_envp_data	environment_con(char **envp)
 /* initialises all data */
 t_data	*constructor(char **envp)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = malloc(sizeof(data));
 	data->envp_data = environment_con(envp);
