@@ -6,13 +6,15 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:43:53 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/23 17:46:12 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:47:03 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minishell.h"
+# include "../minishell.h"
+
+void	parser(t_data *data, char *line);
 
 #endif

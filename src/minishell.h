@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/22 18:45:32 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/23 22:51:13 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define MINISHELL_H
 
 # include "libs/libft/libft.h"
-# include "utils.h"
+// # include "parser/parser.h"
+# include "utils/utils.h"
 //# include "executor/executor.h"
 # include <unistd.h>
 # include <stdio.h>
@@ -41,6 +42,7 @@ typedef struct s_data
 {
 	t_envp_data	envp_data;
 	t_command	command;
+	t_list		*clean_input;
 }				t_data;
 
 t_data	*constructor(char **envp);
