@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/22 18:41:40 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/24 16:25:24 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 # define UTILS_H
 
 int	ft_isspace(int c);
-int	ft_ismetachar(int c);
 
 #endif

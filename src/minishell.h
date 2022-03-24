@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/23 22:51:13 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/24 17:25:26 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 
 # include "libs/libft/libft.h"
-// # include "parser/parser.h"
+# include "parser/parser.h"
 # include "utils/utils.h"
 //# include "executor/executor.h"
 # include <unistd.h>
