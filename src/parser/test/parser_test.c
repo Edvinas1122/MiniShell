@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_test.c                                       :+:      :+:    :+:   */
+/*   parser_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:58:10 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/28 15:05:54 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/28 15:07:37 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ int	main(int argc, char **argv, char **envp)
 		if (line == NULL)
 			break ;
 		lexer(data, line);
+		free(line);
+		parser(data);
 		if (data->clean_input)
 		{
 			ft_lstiter(data->clean_input, ft_print);
 			ft_lstclear(&data->clean_input, free);
 		}
-		free(line);
 	}
 	return (0);
 }

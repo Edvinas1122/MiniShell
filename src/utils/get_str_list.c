@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_remove_char_at.c                               :+:      :+:    :+:   */
+/*   get_str_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 17:48:51 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/28 15:10:15 by cthien-h         ###   ########.fr       */
+/*   Created: 2022/03/28 18:06:19 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/03/28 18:07:38 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-// Return new allocated str without char at idx
-char	*str_remove_char_at(char *str, int idx)
+t_list	*get_str_list(t_list *list, char *to_find)
 {
-	char	*new_str;
-	char	*start;
-
-	if (!str || idx < 0)
-		return (NULL);
-	if (idx >= (int)ft_strlen(str))
-		return (str);
-	new_str = ft_calloc(ft_strlen(str), sizeof(char));
-	if (!new_str)
-		return (NULL);
-	start = new_str;
-	while (*str)
+	while (list)
 	{
-		if (idx == 0)
-			str++;
-		*new_str = *str;
-		str++;
-		new_str++;
-		idx--;
+		if (!ft_strncmp((char *)list->content, to_find, ft_strlen(to_find)))
+			break ;
+		list = list->next;
 	}
-	return (start);
+	return (list);
 }

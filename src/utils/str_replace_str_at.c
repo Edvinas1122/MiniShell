@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_remove_char_at.c                               :+:      :+:    :+:   */
+/*   str_remove_str_at.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 17:48:51 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/28 15:10:15 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:52:17 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-// Return new allocated str without char at idx
-char	*str_remove_char_at(char *str, int idx)
+// Return new allocated str that replaces the old substr
+// with length at idx with new substr
+char	*str_replace_str_at(char *str, int idx, int length, char *replacement)
 {
 	char	*new_str;
-	char	*start;
+	char	*tmp;
 
-	if (!str || idx < 0)
+	if (!str || idx < 0 || length < 0 || !replacement)
 		return (NULL);
 	if (idx >= (int)ft_strlen(str))
 		return (str);
-	new_str = ft_calloc(ft_strlen(str), sizeof(char));
+	if (length >= (int)ft_strlen(str))
+		return (ft_strdup(""));
+	str[idx] = '\0';
+	tmp = ft_strjoin(str, replacement);
+	if (!tmp)
+		return (NULL);
+	new_str = ft_strjoin(tmp, &str[idx + length]);
+	free(tmp);
 	if (!new_str)
 		return (NULL);
-	start = new_str;
-	while (*str)
-	{
-		if (idx == 0)
-			str++;
-		*new_str = *str;
-		str++;
-		new_str++;
-		idx--;
-	}
-	return (start);
+	return (new_str);
 }
