@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:58:28 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/28 18:47:04 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/28 20:53:09 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	parser(t_data *data)
 {
 	t_list	*input_list;
 
-	// env in env problem
 	// command in env problem
 	input_list = data->clean_input;
 	while (input_list)

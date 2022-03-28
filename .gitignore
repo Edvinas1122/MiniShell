@@ -1,5 +1,7 @@
 samples/
 a.out.dSYM/
+parser-test
+lexer-test
 
 ### C ###
 # Prerequisites

@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:58:10 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/28 15:07:37 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/03/28 21:17:43 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 		line = readline("minishell> ");
 		if (line == NULL)
 			break ;
+		add_history(line);
 		lexer(data, line);
 		free(line);
 		parser(data);
