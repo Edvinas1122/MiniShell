@@ -6,20 +6,22 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/28 15:09:51 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/03 23:50:00 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libs/libft/libft.h"
-// # include "parser/parser.h"
-# include "utils/utils.h"
-//# include "executor/executor.h"
 # include <unistd.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <readline/readline.h>
+# include "libs/libft/libft.h"
+# include "constructor/constructor.h"
+# include "parser/parser.h"
+//# include "executor/executor.h"
+# include "utils/utils.h"
 
 /* Command data */
 typedef struct s_command
@@ -30,7 +32,7 @@ typedef struct s_command
 	int		output_fd;
 }			t_command;
 
-/* Eviromental data */
+/* Environment data */
 typedef struct s_envp_data
 {
 	t_list	**envp_cp;
@@ -44,7 +46,5 @@ typedef struct s_data
 	t_command	command;
 	t_list		*clean_input;
 }				t_data;
-
-t_data	*constructor(char **envp);
 
 #endif

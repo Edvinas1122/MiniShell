@@ -6,15 +6,22 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:58:10 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/28 21:17:43 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 00:37:52 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parser.h"
+#include "../../minishell.h"
 
-void	ft_print(void *str)
+void	ft_print(void *p)
 {
-	printf("%s\n", (char *)str);
+	char	**command;
+
+	command = (char **)p;
+	while (*command)
+	{
+		printf("%s\n", *command);
+		command++;
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -31,14 +38,11 @@ int	main(int argc, char **argv, char **envp)
 		if (line == NULL)
 			break ;
 		add_history(line);
-		lexer(data, line);
-		free(line);
-		parser(data);
-		if (data->clean_input)
-		{
-			ft_lstiter(data->clean_input, ft_print);
-			ft_lstclear(&data->clean_input, free);
-		}
+		if (!parser(data, &line))
+			continue ;
+		if (data->command.commands)
+			ft_lstiter(*data->command.commands, ft_print);
 	}
+	deconstructor(data);
 	return (0);
 }

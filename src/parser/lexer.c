@@ -6,31 +6,61 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:43:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/25 20:37:33 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:51:51 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-// Only those that we need to interpret in project
-// Ignore '$' because we get env later in parser
-static int	ft_ismetachar(int c)
+// Clean all the quote in the string
+// Return 0 if error otherwise 1
+static int	clean_quote(char **str)
 {
-	if (c == '>' || c == '<' || c == '|')
-		return (1);
-	return (0);
+	int		i;
+	char	quote;
+	char	*tmp;
+
+	quote = 0;
+	i = 0;
+	while ((*str)[i])
+	{
+		if ((!quote && ((*str)[i] == '"' || (*str)[i] == '\''))
+			|| (quote && (*str)[i] == quote))
+		{
+			if (!quote && ((*str)[i] == '"' || (*str)[i] == '\''))
+				quote = (*str)[i];
+			else if (quote && (*str)[i] == quote)
+				quote = 0;
+			tmp = str_remove_char_at(*str, i);
+			if (!tmp)
+				return (0);
+			free(*str);
+			*str = tmp;
+		}
+		else
+			i++;
+	}
+	return (1);
 }
 
-static void	get_clean_input(char *line, t_list **clean_input_list,
+// Split the input from start to end, clean the quote and add it in a new list
+// Return 0 if error otherwise 1
+static int	get_clean_input(char *line, t_list **clean_input_list,
 	int *start, int *end)
 {
-	ft_lstadd_back(clean_input_list,
-		ft_lstnew(ft_substr(line, *start, *end - *start)));
+	char	*content;
+
+	content = ft_substr(line, *start, *end - *start);
+	if (!content || !clean_quote(&content))
+		return (0);
+	ft_lstadd_back(clean_input_list, ft_lstnew(content));
 	while (line[*end] && ft_isspace(line[*end]))
 		(*end)++;
 	*start = *end;
+	return (1);
 }
 
+// Get the ending index of metachar in line string
 static void	get_metachar_end(char *line, int *end)
 {
 	if ((line[*end] == '>' && line[*end + 1] == '>')
@@ -40,6 +70,7 @@ static void	get_metachar_end(char *line, int *end)
 		*end += 1;
 }
 
+// Get the ending index of quote in line string
 static void	get_quote_end(char *line, int *end)
 {
 	char	quote;
@@ -52,13 +83,13 @@ static void	get_quote_end(char *line, int *end)
 		(*end)++;
 }
 
-void	lexer(t_data *data, char *line)
+// Split the input line into separated string in linked list
+// Return 0 if error otherwise 1
+int	lexer(t_data *data, char *line)
 {
 	int		start;
 	int		end;
 
-	data->clean_input = NULL;
-	line = ft_strtrim(line, " \v\t\f\r\n");
 	start = 0;
 	end = 0;
 	while (line[end])
@@ -71,8 +102,12 @@ void	lexer(t_data *data, char *line)
 			end++;
 		if (line[start] && (ft_isspace(line[end]) || ft_ismetachar(line[end])
 				|| ft_ismetachar(line[end - 1])))
-			get_clean_input(line, &data->clean_input, &start, &end);
+		{
+			if (!get_clean_input(line, &data->clean_input, &start, &end))
+				return (0);
+		}
 	}
-	if (line[start])
-		get_clean_input(line, &data->clean_input, &start, &end);
+	if (line[start] && !get_clean_input(line, &data->clean_input, &start, &end))
+		return (0);
+	return (1);
 }
