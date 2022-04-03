@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   chararraylen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/03 23:29:17 by cthien-h         ###   ########.fr       */
+/*   Created: 2022/04/03 23:28:27 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/03 23:35:13 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
 
-# include "../minishell.h"
+// Get length of 2d char array
+int	chararraylen(char **arr)
+{
+	int	length;
 
-int		ft_isspace(int c);
-char	*str_remove_char_at(char *str, int idx);
-char	*str_replace_str_at(char *str, int idx, int length, char *replacement);
-t_list	*find_list(t_list *list, char *to_find);
-int		ft_ismetachar(int c);
-char	*ft_strjoinspace(char *s1, char *s2);
-int		chararraylen(char **arr);
-
-#endif
+	length = 0;
+	while (arr[length])
+		length++;
+	return (length);
+}
