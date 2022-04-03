@@ -6,11 +6,11 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/28 18:20:40 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/03 17:37:54 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "constructor.h"
 
 /* retunrs copy of environment */
 static t_list	**enviroment_list_con(char **envp)
@@ -19,8 +19,9 @@ static t_list	**enviroment_list_con(char **envp)
 	char	*env_vars_tmp;
 	int		i;
 
+	envp_cp = ft_calloc(1, sizeof(t_list *));
+	*envp_cp = NULL;
 	i = 0;
-	envp_cp = malloc(sizeof(t_list *));
 	while (envp[i])
 	{
 		env_vars_tmp = ft_strdup(envp[i]);
@@ -31,12 +32,13 @@ static t_list	**enviroment_list_con(char **envp)
 }
 
 /* initialises "enviromental" data */
-static t_envp_data	environment_con(char **envp)
+// TODO: Handle empty envp and pwd list
+static t_envp_data	initialise_envp(char **envp)
 {
 	t_envp_data	envp_data;
 
 	envp_data.envp_cp = enviroment_list_con(envp);
-	envp_data.pwd_list = get_str_list(*envp_data.envp_cp, "PWD=");
+	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD");
 	return (envp_data);
 }
 
@@ -45,7 +47,7 @@ t_data	*constructor(char **envp)
 {
 	t_data	*data;
 
-	data = malloc(sizeof(data));
-	data->envp_data = environment_con(envp);
+	data = ft_calloc(1, sizeof(t_data));
+	data->envp_data = initialise_envp(envp);
 	return (data);
 }
