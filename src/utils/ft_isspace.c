@@ -6,12 +6,13 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:23:01 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/03/22 18:25:04 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:19:57 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+// Check if character is space
 int	ft_isspace(int c)
 {
 	if (c == '\v' || c == '\f' || c == '\r'

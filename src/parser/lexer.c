@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:43:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 23:09:48 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:15:34 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ int	lexer(char *line, t_list **clean_input)
 	{
 		if (line[end] == '"' || line[end] == '\'')
 			get_quote_end(line, &end);
-		else if (ft_ismetachar(line[end]))
+		else if (is_meta_char(line[end]))
 			get_metachar_end(line, &end);
 		else
 			end++;
-		if (line[start] && (ft_isspace(line[end]) || ft_ismetachar(line[end])
-				|| ft_ismetachar(line[end - 1])))
+		if (line[start] && (ft_isspace(line[end]) || is_meta_char(line[end])
+				|| is_meta_char(line[end - 1])))
 		{
 			if (!get_clean_input(line, clean_input, &start, &end))
 				return (0);
