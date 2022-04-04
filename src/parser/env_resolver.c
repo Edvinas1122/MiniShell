@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:25:13 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/03 19:50:28 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:27:35 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ static char	*replace_str_env(t_data *data, char *input, int idx)
 int	env_resolver(t_data *data, char **input)
 {
 	int		i;
-	char	squote;
+	char	quote;
 	char	*tmp;
 
-	squote = 0;
+	quote = 0;
 	i = 0;
 	while ((*input)[i])
 	{
-		if (!squote && (*input)[i] == '$')
+		if ((!quote || quote == '"') && (*input)[i] == '$')
 		{
 			tmp = replace_str_env(data, *input, i);
 			if (!tmp)
@@ -86,10 +86,10 @@ int	env_resolver(t_data *data, char **input)
 			if (!(*input)[i])
 				break ;
 		}
-		else if (!squote && (*input)[i] == '\'')
-			squote = '\'';
-		else if (squote && (*input)[i] == '\'')
-			squote = 0;
+		else if (!quote && ((*input)[i] == '\'' || (*input)[i] == '"'))
+			quote = (*input)[i];
+		else if (quote && (*input)[i] == quote)
+			quote = 0;
 		i++;
 	}
 	return (1);
