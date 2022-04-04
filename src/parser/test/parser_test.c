@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:58:10 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 22:39:44 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:39:51 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **envp)
 		if (*data->command.commands)
 			ft_lstiter(*data->command.commands, ft_print_array);
 		ft_lstclear(data->command.commands, (void (*)(void *))free_array);
+		free_array(data->command.paths);
 	}
 	deconstructor(data);
 	return (0);
