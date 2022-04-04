@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/22 16:14:33 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/04 19:21:27 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define MINISHELL_H
 
 #include "libs/libft/libft.h"
-//#include "executor/executor.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <readline/readline.h>
+#include "executor/executor.h"
 
 /* Command data */
 typedef struct	s_command
