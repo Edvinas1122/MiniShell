@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:43:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 23:05:12 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:09:48 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	clean_quote(char **str)
 			else if (quote && (*str)[i] == quote)
 				quote = 0;
 			tmp = str_remove_char_at(*str, i);
+			free(*str);
 			if (!tmp)
 				return (0);
-			free(*str);
 			*str = tmp;
 		}
 		else
