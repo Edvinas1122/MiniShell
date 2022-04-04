@@ -6,17 +6,18 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:58:10 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 00:37:52 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 22:39:44 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_print(void *p)
+static void	ft_print_array(void *p)
 {
 	char	**command;
 
 	command = (char **)p;
+	printf("\n-list-\n");
 	while (*command)
 	{
 		printf("%s\n", *command);
@@ -38,10 +39,10 @@ int	main(int argc, char **argv, char **envp)
 		if (line == NULL)
 			break ;
 		add_history(line);
-		if (!parser(data, &line))
-			continue ;
-		if (data->command.commands)
-			ft_lstiter(*data->command.commands, ft_print);
+		parser(data, &line);
+		if (*data->command.commands)
+			ft_lstiter(*data->command.commands, ft_print_array);
+		ft_lstclear(data->command.commands, (void (*)(void *))free_array);
 	}
 	deconstructor(data);
 	return (0);

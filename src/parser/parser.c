@@ -6,14 +6,13 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:21:43 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 00:34:03 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 21:35:58 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 // Parser cleaner, if clean all then clean commands as well
-// TODO: revise command cleaner
 static int	free_parser(t_data *data, t_list **clean_input, char **line,
 	int clean_all)
 {
@@ -21,7 +20,7 @@ static int	free_parser(t_data *data, t_list **clean_input, char **line,
 		free(*line);
 	ft_lstclear(clean_input, free);
 	if (clean_all)
-		ft_lstclear(data->command.commands, free);
+		ft_lstclear(data->command.commands, (void (*)(void *))free_array);
 	return (0);
 }
 
@@ -44,13 +43,12 @@ int	parser(t_data *data, char **line)
 	char	*tmp;
 
 	data->clean_input = NULL;
-	data->command.commands = ft_calloc(1, sizeof(t_list *));
 	data->command.input_fd = STDIN_FILENO;
 	data->command.output_fd = STDOUT_FILENO;
 	tmp = ft_strtrim(*line, " \v\t\f\r\n");
 	free(*line);
 	*line = tmp;
-	if (!*line || !data->command.commands || !env_resolver(data, line))
+	if (!*line || !env_resolver(data, line))
 		return (parser_error(data, &data->clean_input, line, NULL));
 	if (!lexer(data, *line))
 		return (parser_error(data, &data->clean_input, line, NULL));

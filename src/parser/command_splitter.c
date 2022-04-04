@@ -6,15 +6,16 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:15:16 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 00:34:23 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 22:52:58 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 // Error handler
-static int	error(char *err)
+static int	error(char *err, char **command)
 {
+	free_array(command);
 	if (err)
 		ft_putendl_fd(err, 2);
 	else
@@ -22,34 +23,17 @@ static int	error(char *err)
 	return (0);
 }
 
-// Get new allocated string redirection filename
-// filename is NULL if couldn't find
-// Return 0 if not redirection otherwise 1
-static int	get_io_filename(t_list *list, char **filename)
-{
-	*filename = NULL;
-	if (ft_strncmp(list->content, ">", 2)
-		&& ft_strncmp(list->content, ">>", 3)
-		&& ft_strncmp(list->content, "<", 2)
-		&& ft_strncmp(list->content, "<<", 3))
-		return (0);
-	if (!list->next)
-		return (1);
-	*filename = list->next->content;
-	return (1);
-}
-
-// Get input/ouput fd if redirection, if not redirection return 1 to continue
+// Get input/ouput fd
 // Return 0 if error otherwise 1
 // TODO: discuss how to handle << heredoc
-static int	get_inout_fd(t_data *data, t_list **list)
+static int	get_inout_fd(t_data *data, t_list **list, char **command)
 {
 	char	*filename;
 
-	if (!get_io_filename(*list, &filename))
-		return (1);
-	if (!filename && ft_strncmp((*list)->content, "<<", 3))
-		return (error("syntax error near unexpected token `newline'"));
+	if (!(*list)->next)
+		return (error("syntax error near unexpected token `newline'",
+				command));
+	filename = (*list)->next->content;
 	if (!ft_strncmp((*list)->content, ">", 2))
 		data->command.output_fd = open(filename,
 				O_RDWR | O_TRUNC | O_CREAT, 0644);
@@ -63,10 +47,10 @@ static int	get_inout_fd(t_data *data, t_list **list)
 	if (data->command.output_fd < 0 || data->command.input_fd < 0)
 	{
 		perror(filename);
-		free(filename);
+		free_array(command);
 		return (0);
 	}
-	*list = (*list)->next->next;
+	*list = (*list)->next;
 	return (1);
 }
 
@@ -104,25 +88,29 @@ static int	array_addback(char ***array, char *str)
 // Return 0 if error otherwise 1
 int	split_into_commands(t_data *data, t_list *clean_input)
 {
-	t_list	*list;
 	char	**command;
 
 	command = NULL;
-	list = clean_input;
-	while (list)
+	while (clean_input)
 	{
-		if (!ft_strncmp(list->content, "|", 2))
+		if (is_str_redir(clean_input->content))
 		{
-			if (!command)
-				return (error("syntax error near unexpected token `|'"));
+			if (!get_inout_fd(data, &clean_input, command))
+				return (0);
+		}
+		else if (!ft_strncmp(clean_input->content, "|", 2))
+		{
+			if (!command || !clean_input->next)
+				return (error("syntax error near unexpected token `|'",
+						command));
 			ft_lstadd_back(data->command.commands, ft_lstnew(command));
 			command = NULL;
 		}
-		else if (!get_inout_fd(data, &list))
-			return (0);
-		else if (!array_addback(&command, list->content))
-			return (error(NULL));
-		list = list->next;
+		else if (!array_addback(&command, clean_input->content))
+			return (error(NULL, command));
+		clean_input = clean_input->next;
 	}
+	if (command)
+		ft_lstadd_back(data->command.commands, ft_lstnew(command));
 	return (1);
 }
