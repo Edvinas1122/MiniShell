@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/03 23:29:17 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 22:00:27 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ t_list	*find_list(t_list *list, char *to_find);
 int		ft_ismetachar(int c);
 char	*ft_strjoinspace(char *s1, char *s2);
 int		chararraylen(char **arr);
+void	free_array(char **arr);
+int		is_str_redir(char *str);
 
 #endif
