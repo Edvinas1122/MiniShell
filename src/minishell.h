@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/04 20:35:56 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:02:21 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_data
 {
 	t_envp_data	envp_data;
 	t_command	command;
-	t_list		*clean_input;
 }				t_data;
 
 #endif

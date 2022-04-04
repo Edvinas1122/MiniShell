@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:21:43 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 21:35:58 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:04:58 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,20 @@ static int	parser_error(t_data *data, t_list **clean_input, char **line,
 int	parser(t_data *data, char **line)
 {
 	char	*tmp;
+	t_list	*clean_input;
 
-	data->clean_input = NULL;
+	clean_input = NULL;
 	data->command.input_fd = STDIN_FILENO;
 	data->command.output_fd = STDOUT_FILENO;
 	tmp = ft_strtrim(*line, " \v\t\f\r\n");
 	free(*line);
 	*line = tmp;
 	if (!*line || !env_resolver(data, line))
-		return (parser_error(data, &data->clean_input, line, NULL));
-	if (!lexer(data, *line))
-		return (parser_error(data, &data->clean_input, line, NULL));
-	if (!split_into_commands(data, data->clean_input))
-		return (free_parser(data, &data->clean_input, line, 1));
-	free_parser(data, &data->clean_input, line, 0);
+		return (parser_error(data, &clean_input, line, NULL));
+	if (!lexer(*line, &clean_input))
+		return (parser_error(data, &clean_input, line, NULL));
+	if (!split_into_commands(data, clean_input))
+		return (free_parser(data, &clean_input, line, 1));
+	free_parser(data, &clean_input, line, 0);
 	return (1);
 }

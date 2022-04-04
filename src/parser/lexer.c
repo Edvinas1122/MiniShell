@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:43:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/03 17:51:51 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:05:12 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	get_quote_end(char *line, int *end)
 
 // Split the input line into separated string in linked list
 // Return 0 if error otherwise 1
-int	lexer(t_data *data, char *line)
+int	lexer(char *line, t_list **clean_input)
 {
 	int		start;
 	int		end;
@@ -103,11 +103,11 @@ int	lexer(t_data *data, char *line)
 		if (line[start] && (ft_isspace(line[end]) || ft_ismetachar(line[end])
 				|| ft_ismetachar(line[end - 1])))
 		{
-			if (!get_clean_input(line, &data->clean_input, &start, &end))
+			if (!get_clean_input(line, clean_input, &start, &end))
 				return (0);
 		}
 	}
-	if (line[start] && !get_clean_input(line, &data->clean_input, &start, &end))
+	if (line[start] && !get_clean_input(line, clean_input, &start, &end))
 		return (0);
 	return (1);
 }
