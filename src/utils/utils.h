@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 23:20:11 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:11:41 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ char	*str_join_space(char *s1, char *s2);
 int		char_array_len(char **arr);
 void	free_array(char **arr);
 int		is_str_redir(char *str);
+char	*get_env_value(t_list *envp, char **env);
 
 #endif

@@ -6,34 +6,11 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:25:13 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 23:27:35 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:10:45 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-// Return new allocated environment variable value string from name
-// Return new allocated empty string if couldn't find
-// Return NULL if error
-static char	*get_env_value(t_list *envp, char **env)
-{
-	char	*tmp;
-	t_list	*list;
-
-	if (*env[ft_strlen(*env)] != '=')
-	{
-		tmp = ft_strjoin(*env, "=");
-		if (!tmp)
-			return (NULL);
-		free(*env);
-		*env = tmp;
-	}
-	list = find_list(envp, *env);
-	if (!list)
-		return (ft_strdup(""));
-	return (ft_substr(list->content,
-			ft_strlen(*env), ft_strlen(list->content)));
-}
 
 // Return new allocated that replaces environment variable name with value
 // Environment variable name starts at idx of $
