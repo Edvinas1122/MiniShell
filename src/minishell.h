@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/03 23:50:00 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 20:35:56 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <readline/readline.h>
+# include <readline/history.h>
 # include "libs/libft/libft.h"
 # include "constructor/constructor.h"
 # include "parser/parser.h"
