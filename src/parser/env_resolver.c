@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:25:13 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/05 00:10:45 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:38:04 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*replace_str_env(t_data *data, char *input, int idx)
 	env = ft_substr(input, idx - length, length);
 	if (!env)
 		return (NULL);
-	tmp = get_env_value(*data->envp_data.envp_cp, &env);
+	tmp = get_env_value(*data->envp_data.envp_cp, env);
 	free(env);
 	if (!tmp)
 		return (NULL);
