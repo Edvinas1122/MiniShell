@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/03 17:37:54 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/04 20:43:19 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static t_list	**enviroment_list_con(char **envp)
 }
 
 /* initialises "enviromental" data */
-// TODO: Handle empty envp and pwd list
 static t_envp_data	initialise_envp(char **envp)
 {
 	t_envp_data	envp_data;
@@ -43,11 +42,13 @@ static t_envp_data	initialise_envp(char **envp)
 }
 
 /* initialises all data */
+// TODO: Handle empty envp or commands
 t_data	*constructor(char **envp)
 {
 	t_data	*data;
 
 	data = ft_calloc(1, sizeof(t_data));
 	data->envp_data = initialise_envp(envp);
+	data->command.commands = ft_calloc(1, sizeof(t_list *));
 	return (data);
 }
