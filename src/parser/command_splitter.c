@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:15:16 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/05 19:35:28 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:49:37 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static int	error(char *err, char **command)
 }
 
 // Open heredoc pipe and write the heredoc string to it
-// TODO: revise error case
 static int	get_heredoc(char *stop_str)
 {
 	int		heredoc_pipe[2];
 	char	*line;
 
-	pipe(heredoc_pipe);
+	if (pipe(heredoc_pipe) < 0)
+		return (-1);
 	while (42)
 	{
 		line = readline("> ");
@@ -39,7 +39,8 @@ static int	get_heredoc(char *stop_str)
 		write(heredoc_pipe[1], line, ft_strlen(line));
 		write(heredoc_pipe[1], "\n", 1);
 	}
-	close(heredoc_pipe[1]);
+	if (close(heredoc_pipe[1]) < 0)
+		return (-1);
 	return (heredoc_pipe[0]);
 }
 
