@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   constructor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
+<<<<<<< HEAD:src/constructor.c
 /*   Updated: 2022/04/04 19:21:01 by emomkus          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/04 20:43:19 by cthien-h         ###   ########.fr       */
+>>>>>>> origin/cthien-h:src/constructor/constructor.c
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "constructor.h"
 
 /* retunrs copy of environment */
 static t_list	**enviroment_list_con(char **envp)
@@ -19,8 +23,9 @@ static t_list	**enviroment_list_con(char **envp)
 	char	*env_vars_tmp;
 	int		i;
 
+	envp_cp = ft_calloc(1, sizeof(t_list *));
+	*envp_cp = NULL;
 	i = 0;
-	envp_cp = malloc(sizeof(t_list *));
 	while (envp[i])
 	{
 		env_vars_tmp = ft_strdup(envp[i]);
@@ -30,37 +35,24 @@ static t_list	**enviroment_list_con(char **envp)
 	return (envp_cp);
 }
 
-// Utils
-t_list	*get_str_list(t_list **envp_cp, char *to_find)
-{
-	t_list	*pwd_list;
-
-	pwd_list = *envp_cp;
-	while (pwd_list)
-	{
-		if (!ft_strncmp((char *)pwd_list->content, to_find, ft_strlen(to_find)))
-			break ;
-		pwd_list = pwd_list->next;
-	}
-	return (pwd_list);
-}
-
 /* initialises "enviromental" data */
-static t_envp_data	environment_con(char **envp)
+static t_envp_data	initialise_envp(char **envp)
 {
 	t_envp_data	envp_data;
 
 	envp_data.envp_cp = enviroment_list_con(envp);
-	envp_data.pwd_list = get_str_list(envp_data.envp_cp, "PWD=");
+	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD");
 	return (envp_data);
 }
 
 /* initialises all data */
+// TODO: Handle empty envp or commands
 t_data	*constructor(char **envp)
 {
-	t_data *data;
+	t_data	*data;
 
-	data = malloc(sizeof(data));
-	data->envp_data = environment_con(envp);
+	data = ft_calloc(1, sizeof(t_data));
+	data->envp_data = initialise_envp(envp);
+	data->command.commands = ft_calloc(1, sizeof(t_list *));
 	return (data);
 }

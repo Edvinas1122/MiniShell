@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 10:46:07 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 13:05:02 by emomkus          ###   ########.fr       */
+/*   Created: 2022/03/25 16:58:10 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/05 00:39:51 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-static void	ft_print(void *str)
-{
-	printf("%s\n", (char *)str);
-}
+#include "../../minishell.h"
 
 static void	ft_print_array(void *p)
 {
