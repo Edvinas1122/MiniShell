@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:15:16 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/05 18:21:05 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:35:28 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int	get_heredoc(char *stop_str)
 
 // Get input/ouput fd
 // Return 0 if error otherwise 1
-// TODO: discuss how to handle << heredoc
 static int	get_inout_fd(t_data *data, t_list **list, char **command)
 {
 	char	*filename;
