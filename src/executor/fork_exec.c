@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:58:57 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 18:28:06 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 21:28:12 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,23 @@ static void	close_pipe(t_exec_data *exec_data)
 
 /* checks for builtins and executes them if finds
 	no invalid argument check */
-// static void	check_or_execute_builin(char *cmd_arr)
-// {
-// 	if (ft_strncmp(cmd_arr[0], "echo", 5))
-// 		execute_echo(cmd_arr);
-// 	else if (ft_strncmp(cmd_arr[0], "cd", 3))
-// 		execute_cd(cmd_arr);
-// 	else if (ft_strncmp(cmd_arr[0], "pwd", 4))
-// 		execute_pwd(cmd_arr);
-// 	else if (ft_strncmp(cmd_arr[0], "export", 7))
-// 		execute_export(cmd_arr);
-// 	else if (ft_strncmp(cmd_arr[0], "unset", 6))
-// 		execute_unset(cmd_arr);
-// 	else if (ft_strncmp(cmd_arr[0], "env", 4))
-// 		execute_env();
-// 	else if (ft_strncmp(cmd_arr[0], "exit", 5))
-// 		execute_exit(cmd_arr);
-// }
+static void	check_or_execute_builin(char **cmd_arr)
+{
+	if (!ft_strncmp(cmd_arr[0], "echo", 5))
+		execute_echo(cmd_arr);
+	// else if (ft_strncmp(cmd_arr[0], "cd", 3))
+	// 	execute_cd(cmd_arr);
+	// else if (ft_strncmp(cmd_arr[0], "pwd", 4))
+	// 	execute_pwd(cmd_arr);
+	// else if (ft_strncmp(cmd_arr[0], "export", 7))
+	// 	execute_export(cmd_arr);
+	// else if (ft_strncmp(cmd_arr[0], "unset", 6))
+	// 	execute_unset(cmd_arr);
+	// else if (ft_strncmp(cmd_arr[0], "env", 4))
+	// 	execute_env();
+	// else if (ft_strncmp(cmd_arr[0], "exit", 5))
+	// 	execute_exit(cmd_arr);
+}
 
 /* As a child process checks access & executes command
 	It calls accessor object.
@@ -97,10 +97,10 @@ void	fork_process(t_exec_data *exec_data, char **cmd_arr, char **paths)
 	if (pid == 0)
 	{
 		dup_pipe(exec_data);
-		//check_or_execute_builin(cmd_arr);
+		check_or_execute_builin(cmd_arr);
 		execute = accessor_con(cmd_arr, paths);
 		execute_command(execute, NULL);
-		// in case fail free and signal
+		exit(127);
 	}
 	waitpid(pid, NULL, 0);
 	close_pipe(exec_data);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/05 19:24:23 by cthien-h         ###   ########.fr        #
+#    Updated: 2022/04/05 21:16:22 by emomkus          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,12 @@ CONSTR_DIR = src/constructor/
 CONSTR = $(addprefix $(CONSTR_DIR),$(CONSTR_SRC))
 CONSTR_OBJ = $(CONSTR_SRC:.c=.o)
 
+#Builtin files#
+BUILTIN_SRC = echo.c
+BUILTIN_DIR = src/builtin/
+BUILTIN = $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
+BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
+
 #Utils files#
 UTILS_SRC = ft_isspace.c str_remove_char_at.c str_replace_str_at.c find_list.c \
 			is_meta_char.c char_array_len.c str_join_space.c free_array.c \
@@ -67,8 +73,8 @@ UTILS_OBJ = $(UTILS_SRC:.c=.o)
 .PHONY: all clean fclean re executor parser
 
 #Main Compilation#
-all: $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+all: $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT)
+	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
 
 $(OBJ): $(FILES)
 	$(CC) $(FLAGS) -c $(FILES)
@@ -100,6 +106,10 @@ $(UTILS_OBJ): $(UTILS)
 #Constructor compile#
 $(CONSTR_OBJ): $(CONSTR)
 	$(CC) $(FLAGS) -c $(CONSTR)
+
+#Builtin compile#
+$(BUILTIN_OBJ): $(BUILTIN)
+	$(CC) $(FLAGS) -c $(BUILTIN)
 
 #Library#
 $(LIBFT):

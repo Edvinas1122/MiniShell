@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 19:20:17 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/04 19:21:07 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 21:20:06 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef	EXECUTOR_H
-# define EXECUTOR_H
+#ifndef	BUILTIN_H
+# define BUILTIN_H
 
 #include "../minishell.h"
+
+void	execute_echo(char **argv);
 
 #endif
