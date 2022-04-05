@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:28:35 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/04 19:05:17 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:19:40 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ static char	*path_string_command(char **paths, char *cmd)
 	i = 0;
 	while (paths[i])
 	{
+		// join /
 		path = ft_strjoin(paths[i], cmd);
-		check = access(path, F_OK);
+		check = access(path, X_OK);
 		if (check == 0)
 			break;
 		free(path);
@@ -43,7 +44,7 @@ t_exec_cmd	accessor_con(void **cmd_arr, char **paths)
 {
 	t_exec_cmd	cmd;
 
-	cmd->cmd_arr = cmd_arr;
-	cmd->path_cmd = path_string_command(paths, cmd_arr[0]);
+	cmd.cmd_arr = cmd_arr;
+	cmd.path_cmd = path_string_command(paths, cmd_arr[0]);
 	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/04 17:22:45 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:58:15 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 /* Initiates pipe and informs the rotator */
 static void	initiate_pipe(t_exec_data *exec_data)
 {
-	else if (exec_data->pipe_shift == 0)
+	if (exec_data->pipe_shift == 0)
 	{
-		pipe(exec_data->pipe1);
+		pipe(exec_data->pipe2);
 		exec_data->pipe_shift = 1;
 	}
 	else
 	{
-		pipe(exec_data->pipe2);
+		pipe(exec_data->pipe1);
 		exec_data->pipe_shift = 0;
 	}
 }
@@ -44,8 +44,7 @@ static void	set_out_fd(t_exec_data *exec_data, int fd)
 
 /* Executor, executes commands in cmd_arr. It uses pipe_shift for 
 	"rotation" mechanics of piper.
-	It calls fork object
-	*/
+	It calls fork object s */
 void	executor(t_command command)
 {
 	t_exec_data	exec_data;
@@ -54,15 +53,13 @@ void	executor(t_command command)
 	exec_data.pipe_shift = 1;
 	current_command = *command.commands;
 	set_in_fd(&exec_data, command.input_fd);
-	while (1)
+	while (current_command)
 	{
 		if (current_command->next != NULL)
 			initiate_pipe(&exec_data);
 		else
-			set_out_fd(&exec_data, command.input_fd);
+			set_out_fd(&exec_data, command.output_fd);
 		fork_process(&exec_data, current_command->content, command.paths);
-		if (current_command->next == NULL)
-			break;
 		current_command = current_command->next;
 	}
 	// destructor

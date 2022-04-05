@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:58:57 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/04 19:15:50 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 12:50:14 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	execute_command(t_exec_cmd exe, char **envp)
 }
 
 /* Dubs pipe FD, file FD, FD regarding "rotary motion" */
-static void	dub_pipe(t_exec_data *exec_data)
+static void	dup_pipe(t_exec_data *exec_data)
 {
 	if (exec_data->pipe_shift == 0)
 	{
@@ -85,9 +85,11 @@ void	fork_process(t_exec_data *exec_data, void **cmd_arr, char **paths)
 	if (pid == 0)
 	{
 		dup_pipe(exec_data);
+		// close_pipe_child(exec_data);
 		//check_or_execute_builin(cmd_arr);
 		execute = accessor_con(cmd_arr, paths);
 		execute_command(execute, NULL);
+		// in case fail free and signal
 	}
 	waitpid(pid, NULL, 0);
 	close_pipe(exec_data);
