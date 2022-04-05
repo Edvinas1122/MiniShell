@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 15:56:58 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 16:56:38 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 static void	initiate_pipe(t_exec_data *exec_data)
 {
 	if (exec_data->pipe_shift == 0)
-	{
 		pipe(exec_data->pipe2);
-		exec_data->pipe_shift = 1;
-	}
 	else
-	{
 		pipe(exec_data->pipe1);
+}
+
+static void	rotator(t_exec_data *exec_data)
+{
+	if (exec_data->pipe_shift == 0)
+		exec_data->pipe_shift = 1;
+	else
 		exec_data->pipe_shift = 0;
-	}
 }
 
 /* Sets input fd /is called only when first command/ */
@@ -42,7 +44,7 @@ static void	set_out_fd(t_exec_data *exec_data, int fd)
 		exec_data->pipe1[1] = fd;
 }
 
-/* Executor, executes commands in cmd_arr. It uses pipe_shift for 
+/* Executor, executes commands in cmd_arr. It uses pipe_shift for
 	"rotation" mechanics of piper.
 	It calls fork object s */
 void	executor(t_command command)
@@ -55,12 +57,12 @@ void	executor(t_command command)
 	set_in_fd(&exec_data, command.input_fd);
 	while (current_command)
 	{
-		//write(2, "here\n", 5);
 		if (current_command->next != NULL)
 			initiate_pipe(&exec_data);
 		else
 			set_out_fd(&exec_data, command.output_fd);
 		fork_process(&exec_data, current_command->content, command.paths);
+		rotator(&exec_data);
 		current_command = current_command->next;
 	}
 	// destructor

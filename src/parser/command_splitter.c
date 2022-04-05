@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:15:16 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/04 23:20:18 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 17:08:06 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ static int	get_inout_fd(t_data *data, t_list **list, char **command)
 		return (error("syntax error near unexpected token `newline'",
 				command));
 	filename = (*list)->next->content;
-	if (!ft_strncmp((*list)->content, ">", 2))
+	if (!ft_strncmp((*list)->content, ">>", 3))
 		data->command.output_fd = open(filename,
-				O_RDWR | O_TRUNC | O_CREAT, 0644);
-	else if (!ft_strncmp((*list)->content, ">>", 3))
-		data->command.output_fd = open(filename,
-				O_RDWR | O_TRUNC | O_APPEND, 0644);
-	else if (!ft_strncmp((*list)->content, "<", 2))
-		data->command.input_fd = open(filename, O_RDONLY);
+				O_RDWR | O_CREAT | O_APPEND, 0644);
 	else if (!ft_strncmp((*list)->content, "<<", 3))
 		perror("unimplement");
+	else if (!ft_strncmp((*list)->content, ">", 2))
+		data->command.output_fd = open(filename,
+				O_RDWR | O_TRUNC | O_CREAT, 0644);
+	else if (!ft_strncmp((*list)->content, "<", 2))
+		data->command.input_fd = open(filename, O_RDONLY);
 	if (data->command.output_fd < 0 || data->command.input_fd < 0)
 	{
 		perror(filename);

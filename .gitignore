@@ -2,6 +2,8 @@ samples/
 a.out.dSYM/
 parser-test
 lexer-test
+minishell
+test-file
 
 ### C ###
 # Prerequisites

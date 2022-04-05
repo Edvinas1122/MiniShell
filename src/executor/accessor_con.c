@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   accessor_con.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:28:35 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 15:50:40 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 17:08:44 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
 
-
 /* Appends command to env PATHS and checks if paths are valid */
 static char	*path_string_command(char **paths, char *cmd)
 {
 	char	*path;
+	char	*tmp;
 	int		check;
 	int		i;
 
@@ -24,11 +24,12 @@ static char	*path_string_command(char **paths, char *cmd)
 	i = 0;
 	while (paths[i])
 	{
-		// join /
-		path = ft_strjoin(paths[i], cmd);
+		tmp = ft_strjoin(paths[i], "/");
+		path = ft_strjoin(tmp, cmd);
+		free(tmp);
 		check = access(path, X_OK);
 		if (check == 0)
-			break;
+			break ;
 		free(path);
 		i++;
 	}
@@ -45,6 +46,7 @@ t_exec_cmd	accessor_con(char **cmd_arr, char **paths)
 	t_exec_cmd	cmd;
 
 	cmd.cmd_arr = cmd_arr;
+	// check if it has / then return the same cmd
 	cmd.path_cmd = path_string_command(paths, cmd_arr[0]);
 	return (cmd);
 }
