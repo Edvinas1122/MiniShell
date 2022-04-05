@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+         #
+#    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/05 15:52:37 by emomkus          ###   ########.fr        #
+#    Updated: 2022/04/05 19:24:23 by cthien-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,7 @@ clean:
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean
+	rm -rf *.dSYM
 	rm -f $(EXECUTOR_TEST_NAME) $(PARSER_TEST_NAME)
 	make fclean -C $(LIBFT_DIR)
 
