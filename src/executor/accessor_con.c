@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:28:35 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 17:08:44 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:24:12 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ t_exec_cmd	accessor_con(char **cmd_arr, char **paths)
 	t_exec_cmd	cmd;
 
 	cmd.cmd_arr = cmd_arr;
-	// check if it has / then return the same cmd
-	cmd.path_cmd = path_string_command(paths, cmd_arr[0]);
+	if (ft_strchr(cmd_arr[0], '/'))
+		cmd.path_cmd = ft_strdup(cmd_arr[0]);
+	else
+		cmd.path_cmd = path_string_command(paths, cmd_arr[0]);
 	return (cmd);
 }

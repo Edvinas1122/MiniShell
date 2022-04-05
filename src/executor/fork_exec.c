@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:58:57 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 16:56:54 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:28:06 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,8 @@ static void	dup_pipe(t_exec_data *exec_data)
 {
 	if (exec_data->pipe_shift == 0)
 	{
-		if (exec_data->pipe1[0] != STDIN_FILENO)
-		{
-			dup2(exec_data->pipe1[0], STDIN_FILENO);
-			close(exec_data->pipe1[0]);
-		}
+		dup2(exec_data->pipe1[0], STDIN_FILENO);
+		close(exec_data->pipe1[0]);
 		if (exec_data->pipe2[1] != STDOUT_FILENO)
 		{
 			dup2(exec_data->pipe2[1], STDOUT_FILENO);
@@ -100,7 +97,6 @@ void	fork_process(t_exec_data *exec_data, char **cmd_arr, char **paths)
 	if (pid == 0)
 	{
 		dup_pipe(exec_data);
-		// close_pipes_child(exec_data);
 		//check_or_execute_builin(cmd_arr);
 		execute = accessor_con(cmd_arr, paths);
 		execute_command(execute, NULL);

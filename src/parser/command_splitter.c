@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:15:16 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/05 17:08:06 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:21:05 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,26 @@ static int	error(char *err, char **command)
 	else
 		perror(err);
 	return (0);
+}
+
+// Open heredoc pipe and write the heredoc string to it
+// TODO: revise error case
+static int	get_heredoc(char *stop_str)
+{
+	int		heredoc_pipe[2];
+	char	*line;
+
+	pipe(heredoc_pipe);
+	while (42)
+	{
+		line = readline("> ");
+		if (!line || !ft_strncmp(line, stop_str, ft_strlen(stop_str) + 1))
+			break ;
+		write(heredoc_pipe[1], line, ft_strlen(line));
+		write(heredoc_pipe[1], "\n", 1);
+	}
+	close(heredoc_pipe[1]);
+	return (heredoc_pipe[0]);
 }
 
 // Get input/ouput fd
@@ -38,7 +58,7 @@ static int	get_inout_fd(t_data *data, t_list **list, char **command)
 		data->command.output_fd = open(filename,
 				O_RDWR | O_CREAT | O_APPEND, 0644);
 	else if (!ft_strncmp((*list)->content, "<<", 3))
-		perror("unimplement");
+		data->command.input_fd = get_heredoc(filename);
 	else if (!ft_strncmp((*list)->content, ">", 2))
 		data->command.output_fd = open(filename,
 				O_RDWR | O_TRUNC | O_CREAT, 0644);
