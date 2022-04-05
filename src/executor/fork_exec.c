@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:58:57 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 12:50:14 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:50:29 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static void	dup_pipe(t_exec_data *exec_data)
 {
 	if (exec_data->pipe_shift == 0)
 	{
-		dup2(fd->pipe1[0], STDIN_FILENO);
-		dup2(fd->pipe2[1], STDOUT_FILENO);
+		dup2(exec_data->pipe1[0], STDIN_FILENO);
+		dup2(exec_data->pipe2[1], STDOUT_FILENO);
 	}
 	else
 	{
-		dup2(fd->pipe2[0], STDIN_FILENO);
-		dup2(fd->pipe1[1], STDOUT_FILENO);
+		dup2(exec_data->pipe2[0], STDIN_FILENO);
+		dup2(exec_data->pipe1[1], STDOUT_FILENO);
 	}
 }
 
@@ -39,16 +39,16 @@ static void close_pipe(t_exec_data *exec_data)
 {
 	if (exec_data->pipe_shift == 0)
 	{
-		close(fd->pipe1[0]);
-		if (fd->pipe2[1] != 1)
-			close(fd->pipe2[1]);
+		close(exec_data->pipe1[0]);
+		if (exec_data->pipe2[1] != 1)
+			close(exec_data->pipe2[1]);
 	}
 	else
 	{
-		if (fd->pipe2[0] != 0)
-			close(fd->pipe2[0]);
-		if (fd->pipe1[1] != 1)
-			close(fd->pipe1[1]);
+		if (exec_data->pipe2[0] != 0)
+			close(exec_data->pipe2[0]);
+		if (exec_data->pipe1[1] != 1)
+			close(exec_data->pipe1[1]);
 	}
 }
 
@@ -76,7 +76,7 @@ static void close_pipe(t_exec_data *exec_data)
 /* As a child process checks access & executes command 
 	It calls accessor object.
 	*/
-void	fork_process(t_exec_data *exec_data, void **cmd_arr, char **paths)
+void	fork_process(t_exec_data *exec_data, char **cmd_arr, char **paths)
 {
 	int			pid;
 	t_exec_cmd	execute;

@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 13:05:25 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:41:32 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "libs/libft/libft.h"
 # include "constructor/constructor.h"
 # include "parser/parser.h"
-//# include "executor/executor.h"
+# include "executor/executor.h"
 # include "utils/utils.h"
 
 /* Command data */

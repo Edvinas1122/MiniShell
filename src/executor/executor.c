@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 12:58:15 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:56:58 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	executor(t_command command)
 	set_in_fd(&exec_data, command.input_fd);
 	while (current_command)
 	{
+		//write(2, "here\n", 5);
 		if (current_command->next != NULL)
 			initiate_pipe(&exec_data);
 		else

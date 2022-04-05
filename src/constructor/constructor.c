@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-<<<<<<< HEAD:src/constructor.c
-/*   Updated: 2022/04/04 19:21:01 by emomkus          ###   ########.fr       */
-=======
-/*   Updated: 2022/04/04 20:43:19 by cthien-h         ###   ########.fr       */
->>>>>>> origin/cthien-h:src/constructor/constructor.c
+/*   Updated: 2022/04/05 15:37:03 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

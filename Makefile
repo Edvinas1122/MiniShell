@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/05 00:11:48 by cthien-h         ###   ########.fr        #
+#    Updated: 2022/04/05 15:52:37 by emomkus          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,23 +14,28 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror -g
 NAME = minishell
 
+SRC = main.c
+DIR = src/
+FILES = $(addprefix $(DIR),$(SRC))
+OBJ = $(SRC:.c=.o)
+
 #Library files#
 LIBFT_FILES = libft.a
 LIBFT_DIR = src/libs/libft/
 LIBFT = $(addprefix $(LIBFT_DIR),$(LIBFT_FILES))
 
 #Executor files#
-EXECUTOR_FILES = forking.c
+EXECUTOR_FILES = executor.c accessor_con.c fork_exec.c
 EXECUTOR_DIR = src/executor/
 EXECUTOR = $(addprefix $(EXECUTOR_DIR),$(EXECUTOR_FILES))
 EXECUTOR_OBJ = $(EXECUTOR_FILES:.c=.o)
 
-#Executor test files#
-EXECUTOR_TEST_FILES = print_fd.c argv_manage.c read_fd.c
-EXECUTOR_TEST_DIR = src/executor/test/
-EXECUTOR_TEST = $(addprefix $(EXECUTOR_TEST_DIR),$(EXECUTOR_TEST_FILES))
-EXECUTOR_TEST_OBJ = $(EXECUTOR_TEST_FILES:.c=.o)
-EXECUTOR_TEST_NAME = executor-test
+# #Executor test files#
+# EXECUTOR_TEST_FILES = print_fd.c argv_manage.c read_fd.c
+# EXECUTOR_TEST_DIR = src/executor/test/
+# EXECUTOR_TEST = $(addprefix $(EXECUTOR_TEST_DIR),$(EXECUTOR_TEST_FILES))
+# EXECUTOR_TEST_OBJ = $(EXECUTOR_TEST_FILES:.c=.o)
+# EXECUTOR_TEST_NAME = executor-test
 
 #Parser files#
 PARSER_SRC = parser.c env_resolver.c lexer.c command_splitter.c
@@ -62,21 +67,21 @@ UTILS_OBJ = $(UTILS_SRC:.c=.o)
 .PHONY: all clean fclean re executor parser
 
 #Main Compilation#
-all: $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+all: $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT)
+	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
 
 $(OBJ): $(FILES)
 	$(CC) $(FLAGS) -c $(FILES)
 
-#Executor test compilation#
-executor: $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT) -o $(EXECUTOR_TEST_NAME)
+# #Executor test compilation#
+# executor: $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT)
+# 	$(CC) $(FLAGS) $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT) -o $(EXECUTOR_TEST_NAME)
 
 $(EXECUTOR_OBJ): $(EXECUTOR)
 	$(CC) $(FLAGS) -c $(EXECUTOR)
 
-$(EXECUTOR_TEST_OBJ): $(EXECUTOR_TEST)
-	$(CC) $(FLAGS) -c $(EXECUTOR_TEST)
+# $(EXECUTOR_TEST_OBJ): $(EXECUTOR_TEST)
+# 	$(CC) $(FLAGS) -c $(EXECUTOR_TEST)
 
 #Parser test compile#
 parser:  $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(LIBFT)

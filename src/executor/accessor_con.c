@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:28:35 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 12:19:40 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/05 15:50:40 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*path_string_command(char **paths, char *cmd)
 
 /* Returns struct of final executor data, checks for command path with access
 	*/
-t_exec_cmd	accessor_con(void **cmd_arr, char **paths)
+t_exec_cmd	accessor_con(char **cmd_arr, char **paths)
 {
 	t_exec_cmd	cmd;
 
