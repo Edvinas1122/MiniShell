@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:58:57 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 21:28:12 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/06 13:02:19 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static void	execute_command(t_exec_cmd exe, char **envp)
 {
 	execve(exe.path_cmd, exe.cmd_arr, envp);
+	perror(exe.cmd_arr[0]);
 }
 
 /* Dubs pipe FD, file FD, FD regarding "rotary motion" and close previous pipe*/
@@ -30,6 +31,8 @@ static void	dup_pipe(t_exec_data *exec_data)
 			dup2(exec_data->pipe2[1], STDOUT_FILENO);
 			close(exec_data->pipe2[1]);
 		}
+		if (exec_data->pipe2[0] != STDIN_FILENO)
+			close(exec_data->pipe2[0]);
 	}
 	else
 	{
@@ -43,6 +46,7 @@ static void	dup_pipe(t_exec_data *exec_data)
 			dup2(exec_data->pipe1[1], STDOUT_FILENO);
 			close(exec_data->pipe1[1]);
 		}
+		close(exec_data->pipe1[0]);
 	}
 }
 
@@ -51,7 +55,7 @@ static void	close_pipe(t_exec_data *exec_data)
 {
 	if (exec_data->pipe_shift == 0)
 	{
-		if (exec_data->pipe2[0] != STDIN_FILENO)
+		if (exec_data->pipe1[0] != STDIN_FILENO)
 			close(exec_data->pipe1[0]);
 		if (exec_data->pipe2[1] != STDOUT_FILENO)
 			close(exec_data->pipe2[1]);
@@ -88,10 +92,11 @@ static void	check_or_execute_builin(char **cmd_arr)
 /* As a child process checks access & executes command
 	It calls accessor object.
 	*/
-void	fork_process(t_exec_data *exec_data, char **cmd_arr, char **paths)
+int	fork_process(t_exec_data *exec_data, char **cmd_arr, char **paths)
 {
 	int			pid;
 	t_exec_cmd	execute;
+	int			status;
 
 	pid = fork();
 	if (pid == 0)
@@ -99,9 +104,16 @@ void	fork_process(t_exec_data *exec_data, char **cmd_arr, char **paths)
 		dup_pipe(exec_data);
 		check_or_execute_builin(cmd_arr);
 		execute = accessor_con(cmd_arr, paths);
-		execute_command(execute, NULL);
+		if (!execute.path_cmd)
+		{
+			ft_putstr_fd(cmd_arr[0], 2);
+			ft_putendl_fd(": command not found", 2);
+		}
+		else
+			execute_command(execute, NULL);
 		exit(127);
 	}
-	waitpid(pid, NULL, 0);
 	close_pipe(exec_data);
+	waitpid(pid, &status, 0);
+	return (WEXITSTATUS(status));
 }

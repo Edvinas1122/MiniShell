@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 18:17:38 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/06 13:07:49 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ static void	set_out_fd(t_exec_data *exec_data, int fd)
 /* Executor, executes commands in cmd_arr. It uses pipe_shift for
 	"rotation" mechanics of piper.
 	It calls fork object s */
-void	executor(t_command command)
+void	executor(t_data *data)
 {
 	t_exec_data	exec_data;
 	t_list		*current_command;
+	t_command	command;
 
+	command = data->command;
 	exec_data.pipe_shift = 1;
 	current_command = *command.commands;
 	set_in_fd(&exec_data, command.input_fd);
@@ -61,9 +63,9 @@ void	executor(t_command command)
 			initiate_pipe(&exec_data);
 		else
 			set_out_fd(&exec_data, command.output_fd);
-		fork_process(&exec_data, current_command->content, command.paths);
+		data->envp_data.status = fork_process(&exec_data,
+				current_command->content, command.paths);
 		rotator(&exec_data);
 		current_command = current_command->next;
 	}
-	// destructor
 }
