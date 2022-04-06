@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   dup2_and_close.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 19:23:04 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 17:50:08 by cthien-h         ###   ########.fr       */
+/*   Created: 2022/04/06 17:51:05 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/06 17:52:57 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "utils.h"
 
-int	execute_echo(t_data *data, char **argv)
+// Dup2 fd_from to fd_to and close fd_from
+// Check to make sure fd_from isn't standard fd (0, 1, 2)
+void	dup2_and_close(int fd_from, int fd_to)
 {
-	int	i;
-	int	nl;
-
-	(void)data;
-	nl = 1;
-	i = 1;
-	if (argv[i] && !ft_strncmp(argv[i], "-n", 3))
+	if (fd_from > 2)
 	{
-		i++;
-		nl = 0;
+		dup2(fd_from, fd_to);
+		close(fd_from);
 	}
-	while (argv[i])
-	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
-		i++;
-	}
-	if (nl)
-		ft_putchar_fd('\n', STDOUT_FILENO);
-	return (EXIT_SUCCESS);
 }

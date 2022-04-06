@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:41 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 13:00:44 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:50:38 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ typedef struct s_exec_cmd
 }				t_exec_cmd;
 
 void		executor(t_data *data);
-int			fork_process(t_exec_data *exec_data, char **cmd_arr,
+int			fork_process(t_data *data, t_exec_data *exec_data, char **cmd_arr,
 				char **paths);
 t_exec_cmd	accessor_con(char **cmd_arr, char **paths);
+int			check_or_execute_builtin(t_data *data, t_exec_data *exec_data,
+				char **cmd_arr);
 
 #endif

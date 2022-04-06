@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 13:07:49 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:39:30 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ void	executor(t_data *data)
 			initiate_pipe(&exec_data);
 		else
 			set_out_fd(&exec_data, command.output_fd);
-		data->envp_data.status = fork_process(&exec_data,
-				current_command->content, command.paths);
+		if (!check_or_execute_builtin(data, &exec_data,
+				current_command->content))
+			data->envp_data.status = fork_process(data, &exec_data,
+					current_command->content, command.paths);
 		rotator(&exec_data);
 		current_command = current_command->next;
 	}
