@@ -6,7 +6,7 @@
 #    By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/05 21:16:22 by emomkus          ###   ########.fr        #
+#    Updated: 2022/04/06 14:09:55 by emomkus          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT_DIR = src/libs/libft/
 LIBFT = $(addprefix $(LIBFT_DIR),$(LIBFT_FILES))
 
 #Executor files#
-EXECUTOR_FILES = executor.c accessor_con.c fork_exec.c
+EXECUTOR_FILES = executor.c accessor_con.c fork_exec.c dup.c
 EXECUTOR_DIR = src/executor/
 EXECUTOR = $(addprefix $(EXECUTOR_DIR),$(EXECUTOR_FILES))
 EXECUTOR_OBJ = $(EXECUTOR_FILES:.c=.o)

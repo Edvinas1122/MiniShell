@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 13:07:49 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/06 15:14:44 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	executor(t_data *data)
 			initiate_pipe(&exec_data);
 		else
 			set_out_fd(&exec_data, command.output_fd);
-		data->envp_data.status = fork_process(&exec_data,
+		data->envp_data.status = fork_process(data, &exec_data,
 				current_command->content, command.paths);
 		rotator(&exec_data);
 		current_command = current_command->next;
