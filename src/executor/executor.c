@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 17:39:30 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:14:29 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	executor(t_data *data)
 			set_out_fd(&exec_data, command.output_fd);
 		if (!check_or_execute_builtin(data, &exec_data,
 				current_command->content))
-			data->envp_data.status = fork_process(data, &exec_data,
+			data->envp_data.exit_status = fork_process(data, &exec_data,
 					current_command->content, command.paths);
 		rotator(&exec_data);
 		current_command = current_command->next;
