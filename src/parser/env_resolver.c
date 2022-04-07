@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:25:13 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/05 00:38:04 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:39:35 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static char	*replace_str_env(t_data *data, char *input, int idx)
 	char	*tmp;
 	int		length;
 
-	idx++;
 	length = 0;
 	while (input[idx] && (ft_isalpha(input[idx]) || input[idx] == '_'))
 	{
@@ -41,6 +40,25 @@ static char	*replace_str_env(t_data *data, char *input, int idx)
 	return (new_str);
 }
 
+// Check if env is a special environment variable and return it
+// Otherwise return env from normal envp
+static char	*check_and_get_env(t_data *data, char *input, int idx)
+{
+	char	*exit_status;
+	char	*ret;
+
+	idx++;
+	if (input[idx] && input[idx] == '?')
+	{
+		exit_status = ft_itoa(data->envp_data.exit_status);
+		ret = str_replace_str_at(input, idx - 1, 2, exit_status);
+		free(exit_status);
+		return (ret);
+	}
+	else
+		return (replace_str_env(data, input, idx));
+}
+
 // Resolve all environment variable in the string
 // Return 0 if error otherwise 1
 int	env_resolver(t_data *data, char **input)
@@ -55,7 +73,7 @@ int	env_resolver(t_data *data, char **input)
 	{
 		if ((!quote || quote == '"') && (*input)[i] == '$')
 		{
-			tmp = replace_str_env(data, *input, i);
+			tmp = check_and_get_env(data, *input, i);
 			if (!tmp)
 				return (0);
 			free(*input);
