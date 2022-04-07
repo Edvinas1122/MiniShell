@@ -6,11 +6,29 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:25:13 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/07 16:39:35 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:57:19 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+static char	*get_pwd(t_envp_data envp_data)
+{
+	char	*pwd;
+
+	pwd = get_env_value(*envp_data.envp_cp, "PWD");
+	if (!pwd)
+		return (NULL);
+	if (!ft_strlen(pwd))
+	{
+		if (!envp_data.pwd)
+			return (ft_strdup(""));
+		pwd = ft_strdup(envp_data.pwd);
+		if (!pwd)
+			return (NULL);
+	}
+	return (pwd);
+}
 
 // Return new allocated that replaces environment variable name with value
 // Environment variable name starts at idx of $
@@ -31,7 +49,10 @@ static char	*replace_str_env(t_data *data, char *input, int idx)
 	env = ft_substr(input, idx - length, length);
 	if (!env)
 		return (NULL);
-	tmp = get_env_value(*data->envp_data.envp_cp, env);
+	if (!ft_strncmp(env, "PWD", 4))
+		tmp = get_pwd(data->envp_data);
+	else
+		tmp = get_env_value(*data->envp_data.envp_cp, env);
 	free(env);
 	if (!tmp)
 		return (NULL);
