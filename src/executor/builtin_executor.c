@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:53:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/06 18:02:07 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:14:29 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	check_or_execute_builtin(t_data *data, t_exec_data *exec_data,
 	original_input = -1;
 	original_output = -1;
 	dup_pipe(exec_data, &original_input, &original_output);
-	data->envp_data.status = builtin(data, cmd_arr);
+	data->envp_data.exit_status = builtin(data, cmd_arr);
 	if (original_input > -1)
 		dup2_and_close(original_input, STDIN_FILENO);
 	if (original_output > 1)

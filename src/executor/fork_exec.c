@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:58:57 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/07 15:37:49 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/07 16:21:20 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	fork_process(t_data *data, t_exec_data *exec_data,
 {
 	int			pid;
 	t_exec_cmd	execute;
-	int			status;
+	int			exit_status;
 
 	(void)data;
 	pid = fork();
@@ -83,6 +83,6 @@ int	fork_process(t_data *data, t_exec_data *exec_data,
 		exit(127);
 	}
 	close_pipe(exec_data);
-	waitpid(pid, &status, 0);
-	return (WEXITSTATUS(status));
+	waitpid(pid, &exit_status, 0);
+	return (WEXITSTATUS(exit_status));
 }
