@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 13:07:51 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/07 16:17:19 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ typedef struct s_command
 typedef struct s_envp_data
 {
 	t_list	**envp_cp;
+	t_list	**envp_empty;
 	t_list	*pwd_list;
-	int		status;
+	char	*pwd;
+	char	*pwd_slink;
+	int		exit_status;
 }				t_envp_data;
 
 /* Main data struct */
