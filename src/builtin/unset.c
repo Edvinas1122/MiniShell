@@ -6,12 +6,13 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:10:46 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/08 19:24:17 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/08 20:05:09 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
+// Loop and find env then delete free it if exists
 static void	unset_env(t_list *envp, char *env)
 {
 	t_list	*tmp;
