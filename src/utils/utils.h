@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/08 04:34:21 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:23:37 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*get_env_value(t_list *envp, char *env);
 void	dup2_and_close(int fd_from, int fd_to);
 void	handle_parent_signals(void);
 void	handle_child_signals(void);
+int		is_valid_env(char *str);
 
 #endif

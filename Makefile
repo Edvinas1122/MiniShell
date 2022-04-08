@@ -6,12 +6,12 @@
 #    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/08 04:34:46 by cthien-h         ###   ########.fr        #
+#    Updated: 2022/04/08 18:23:53 by cthien-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
 NAME = minishell
 
 SRC = main.c
@@ -58,7 +58,7 @@ BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
 #Utils files#
 UTILS_SRC = ft_isspace.c str_remove_char_at.c str_replace_str_at.c find_list.c \
 			is_meta_char.c char_array_len.c str_join_space.c free_array.c \
-			is_str_redir.c get_env_value.c dup2_and_close.c signals.c
+			is_str_redir.c get_env_value.c dup2_and_close.c signals.c is_valid_env.c
 UTILS_DIR = src/utils/
 UTILS = $(addprefix $(UTILS_DIR),$(UTILS_SRC))
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
@@ -67,20 +67,13 @@ UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
 #Main Compilation#
 all: $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 
 $(OBJ): $(FILES)
 	$(CC) $(FLAGS) -c $(FILES)
 
-# #Executor test compilation#
-# executor: $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT)
-# 	$(CC) $(FLAGS) $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT) -o $(EXECUTOR_TEST_NAME)
-
 $(EXECUTOR_OBJ): $(EXECUTOR)
 	$(CC) $(FLAGS) -c $(EXECUTOR)
-
-# $(EXECUTOR_TEST_OBJ): $(EXECUTOR_TEST)
-# 	$(CC) $(FLAGS) -c $(EXECUTOR_TEST)
 
 #Parser test compile#
 parser:  $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(LIBFT)
