@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 14:25:13 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/08 19:59:22 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/08 20:17:22 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*resolving_env(t_envp_data envp_data, char *env_name)
 	if (!ft_strncmp(env_name, "PWD", 4))
 		return (get_pwd(envp_data));
 	else
-		return (get_env_value(envp_data.envp_cp, env_name));
+		return (get_env_value(*envp_data.envp_cp, env_name));
 }
 
 // Return new allocated that replaces environment variable name with value
