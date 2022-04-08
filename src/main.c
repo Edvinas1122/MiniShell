@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:46:07 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 13:14:18 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/08 04:34:55 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	data = constructor(envp);
+	handle_parent_signals();
 	while (42)
 	{
 		line = readline("minishell> ");
