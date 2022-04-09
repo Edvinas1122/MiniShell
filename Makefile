@@ -6,7 +6,7 @@
 #    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/08 18:23:53 by cthien-h         ###   ########.fr        #
+#    Updated: 2022/04/09 15:42:32 by cthien-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ CONSTR = $(addprefix $(CONSTR_DIR),$(CONSTR_SRC))
 CONSTR_OBJ = $(CONSTR_SRC:.c=.o)
 
 #Builtin files#
-BUILTIN_SRC = echo.c unset.c
+BUILTIN_SRC = echo.c unset.c env.c exit.c
 BUILTIN_DIR = src/builtin/
 BUILTIN = $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
@@ -58,7 +58,8 @@ BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
 #Utils files#
 UTILS_SRC = ft_isspace.c str_remove_char_at.c str_replace_str_at.c find_list.c \
 			is_meta_char.c char_array_len.c str_join_space.c free_array.c \
-			is_str_redir.c get_env_value.c dup2_and_close.c signals.c is_valid_env.c
+			is_str_redir.c get_env_value.c dup2_and_close.c signals.c is_valid_env.c \
+			ft_isnbr.c
 UTILS_DIR = src/utils/
 UTILS = $(addprefix $(UTILS_DIR),$(UTILS_SRC))
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
