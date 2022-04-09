@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:15:16 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/05 19:49:37 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/09 16:07:37 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	array_addback(char ***array, char *str)
 
 	if (!*array)
 	{
-		*array = ft_calloc(2, sizeof(char **));
+		*array = ft_calloc(2, sizeof(char *));
 		if (!*array)
 			return (0);
 		(*array)[0] = ft_strdup(str);
