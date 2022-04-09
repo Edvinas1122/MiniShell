@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:53:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/07 16:14:29 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/09 15:42:42 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static void	*get_builtin_function(char *command)
 	// 	return (&execute_export);
 	else if (!ft_strncmp(command, "unset", 6))
 		return (&execute_unset);
-	// else if (!ft_strncmp(command, "env", 4))
-	// 	return (&execute_env);
-	// else if (!ft_strncmp(command, "exit", 5))
-	// 	return (&execute_exit);
+	else if (!ft_strncmp(command, "env", 4))
+		return (&execute_env);
+	else if (!ft_strncmp(command, "exit", 5))
+		return (&execute_exit);
 	return (NULL);
 }
 

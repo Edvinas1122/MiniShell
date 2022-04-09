@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 19:20:17 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/09 15:43:07 by cthien-h         ###   ########.fr       */
+/*   Created: 2022/04/09 14:54:10 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/09 15:02:03 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "builtin.h"
 
-# include "../minishell.h"
+int	execute_env(t_data *data, char **argv)
+{
+	t_list	*list;
 
-int		execute_echo(t_data *data, char **argv);
-int		execute_unset(t_data *data, char **argv);
-int		execute_env(t_data *data, char **argv);
-int		execute_exit(t_data *data, char **argv);
-
-#endif
+	(void)argv;
+	list = *data->envp_data.envp_cp;
+	while (list)
+	{
+		ft_putendl_fd(list->content, STDOUT_FILENO);
+		list = list->next;
+	}
+	return (EXIT_SUCCESS);
+}
