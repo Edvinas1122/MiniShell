@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 19:23:04 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/08 20:25:05 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/09 16:50:34 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Check if it's a "-n" flag with any amount of n
 static int	is_nl_flag(char *str)
 {
-	if (!str && *str != '-')
+	if (!str || *str != '-')
 		return (0);
 	str++;
 	while (*str && *str != 'n')
