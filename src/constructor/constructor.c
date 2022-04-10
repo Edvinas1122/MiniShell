@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/07 16:22:04 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/07 19:03:05 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static t_envp_data	initialise_envp(char **envp)
 	envp_data.envp_cp = enviroment_list_con(envp);
 	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD");
 	envp_data.exit_status = 0;
+	envp_data.pwd = get_cwd();
 	return (envp_data);
 }
 

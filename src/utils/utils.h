@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/06 17:52:56 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:00:45 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void	free_array(char **arr);
 int		is_str_redir(char *str);
 char	*get_env_value(t_list *envp, char *env);
 void	dup2_and_close(int fd_from, int fd_to);
+char	*get_cwd(void);
+int		change_dir(t_data *data, char *dir);
 
 #endif

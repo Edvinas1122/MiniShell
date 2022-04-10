@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   get_cwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/04 19:20:17 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/07 17:25:42 by emomkus          ###   ########.fr       */
+/*   Created: 2022/04/07 16:55:43 by emomkus           #+#    #+#             */
+/*   Updated: 2022/04/07 18:10:13 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include "utils.h"
 
-# include "../minishell.h"
+/* Returns pointer to malloced string - system current working dirrectory */
+char	*get_cwd(void)
+{
+	char	*cwd;
+	char	*buf;
+	int		size;
 
-int	execute_echo(t_data *data, char **argv);
-int	execute_unset(t_data *data, char **argv);
-int	execute_cd(t_data *data, char **argv);
-
-#endif
+	cwd = NULL;
+	size = 1;
+	while (!cwd)
+	{
+		buf = malloc(size);
+		cwd = getcwd(buf, size);
+		if (!cwd)
+			free(buf);
+		size++;
+	}
+	return (cwd);
+}

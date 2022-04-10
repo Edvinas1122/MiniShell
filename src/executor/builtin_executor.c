@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_executor.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:53:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/07 16:14:29 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/07 17:18:05 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	*get_builtin_function(char *command)
 {
 	if (!ft_strncmp(command, "echo", 5))
 		return (&execute_echo);
-	// else if (!ft_strncmp(command, "cd", 3))
-	// 	return (&execute_cd);
+	else if (!ft_strncmp(command, "cd", 3))
+		return (&execute_cd);
 	// else if (!ft_strncmp(command, "pwd", 4))
 	// 	return (&execute_pwd);
 	// else if (!ft_strncmp(command, "export", 7))
