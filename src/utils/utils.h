@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/10 21:02:53 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/10 21:28:51 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ void	handle_parent_signals(void);
 void	handle_child_signals(void);
 int		is_valid_env(char *str);
 int		ft_isnbr(char *nptr);
+char	*get_cwd(void);
+int		change_dir(t_data *data, char *dir);
+
 
 #endif

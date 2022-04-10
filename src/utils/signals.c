@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 04:32:08 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/08 20:03:54 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/10 21:22:22 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	sigint_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_on_new_line();
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_redisplay();
