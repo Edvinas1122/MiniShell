@@ -3,15 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+         #
+#    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/04/07 18:52:02 by emomkus          ###   ########.fr        #
+=======
+#    Updated: 2022/04/09 15:42:32 by cthien-h         ###   ########.fr        #
+>>>>>>> 57f585a66ffcf0d2620c3bdf702f7d67a340aef5
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
 NAME = minishell
 
 SRC = main.c
@@ -50,7 +54,11 @@ CONSTR = $(addprefix $(CONSTR_DIR),$(CONSTR_SRC))
 CONSTR_OBJ = $(CONSTR_SRC:.c=.o)
 
 #Builtin files#
+<<<<<<< HEAD
 BUILTIN_SRC = echo.c unset.c cd.c
+=======
+BUILTIN_SRC = echo.c unset.c env.c exit.c
+>>>>>>> 57f585a66ffcf0d2620c3bdf702f7d67a340aef5
 BUILTIN_DIR = src/builtin/
 BUILTIN = $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
@@ -58,7 +66,12 @@ BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
 #Utils files#
 UTILS_SRC = ft_isspace.c str_remove_char_at.c str_replace_str_at.c find_list.c \
 			is_meta_char.c char_array_len.c str_join_space.c free_array.c \
+<<<<<<< HEAD
 			is_str_redir.c get_env_value.c dup2_and_close.c get_cwd.c change_directory.c
+=======
+			is_str_redir.c get_env_value.c dup2_and_close.c signals.c is_valid_env.c \
+			ft_isnbr.c
+>>>>>>> 57f585a66ffcf0d2620c3bdf702f7d67a340aef5
 UTILS_DIR = src/utils/
 UTILS = $(addprefix $(UTILS_DIR),$(UTILS_SRC))
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
@@ -67,20 +80,13 @@ UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
 #Main Compilation#
 all: $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 
 $(OBJ): $(FILES)
 	$(CC) $(FLAGS) -c $(FILES)
 
-# #Executor test compilation#
-# executor: $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT)
-# 	$(CC) $(FLAGS) $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(LIBFT) -o $(EXECUTOR_TEST_NAME)
-
 $(EXECUTOR_OBJ): $(EXECUTOR)
 	$(CC) $(FLAGS) -c $(EXECUTOR)
-
-# $(EXECUTOR_TEST_OBJ): $(EXECUTOR_TEST)
-# 	$(CC) $(FLAGS) -c $(EXECUTOR_TEST)
 
 #Parser test compile#
 parser:  $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(LIBFT)

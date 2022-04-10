@@ -6,29 +6,48 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 19:23:04 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/06 17:50:08 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/09 16:50:34 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 
+// Check if it's a "-n" flag with any amount of n
+static int	is_nl_flag(char *str)
+{
+	if (!str || *str != '-')
+		return (0);
+	str++;
+	while (*str && *str != 'n')
+	{
+		if (*str != 'n')
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	execute_echo(t_data *data, char **argv)
 {
-	int	i;
 	int	nl;
+	int	printed;
 
 	(void)data;
+	argv++;
+	printed = 0;
 	nl = 1;
-	i = 1;
-	if (argv[i] && !ft_strncmp(argv[i], "-n", 3))
+	while (*argv)
 	{
-		i++;
-		nl = 0;
-	}
-	while (argv[i])
-	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
-		i++;
+		if (!printed && is_nl_flag(*argv))
+			nl = 0;
+		else
+		{
+			if (printed)
+				ft_putchar_fd(' ', STDOUT_FILENO);
+			ft_putstr_fd(*argv, STDOUT_FILENO);
+			printed = 1;
+		}
+		argv++;
 	}
 	if (nl)
 		ft_putchar_fd('\n', STDOUT_FILENO);

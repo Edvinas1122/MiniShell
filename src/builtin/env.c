@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 13:16:39 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/07 16:48:59 by cthien-h         ###   ########.fr       */
+/*   Created: 2022/04/09 14:54:10 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/09 15:02:03 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-/*
-* Dublicates string allocates and returns pointer to allocated dublicated str
-*/
-char	*ft_strdup(const char *s)
-{
-	char	*snew;
-	int		i;
+#include "builtin.h"
 
-	if (!s)
-		return (NULL);
-	snew = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	i = 0;
-	while (s[i])
+int	execute_env(t_data *data, char **argv)
+{
+	t_list	*list;
+
+	(void)argv;
+	list = *data->envp_data.envp_cp;
+	while (list)
 	{
-		snew[i] = s[i];
-		i++;
+		ft_putendl_fd(list->content, STDOUT_FILENO);
+		list = list->next;
 	}
-	snew[i] = '\0';
-	return (snew);
+	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:43:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/08 10:44:31 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/10 21:02:45 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	lexer(char *line, t_list **clean_input)
 	end = 0;
 	while (line[end])
 	{
+		if (line[end] == '#')
+			ft_bzero(&line[end], ft_strlen(&line[end]));
 		if (line[end] == '"' || line[end] == '\'')
 			get_quote_end(line, &end);
 		else if (is_meta_char(line[end]))

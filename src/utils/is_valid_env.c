@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   is_valid_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 13:16:39 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/07 16:48:59 by cthien-h         ###   ########.fr       */
+/*   Created: 2022/04/08 18:12:10 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/08 19:46:14 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-/*
-* Dublicates string allocates and returns pointer to allocated dublicated str
-*/
-char	*ft_strdup(const char *s)
-{
-	char	*snew;
-	int		i;
+#include "utils.h"
 
-	if (!s)
-		return (NULL);
-	snew = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	i = 0;
-	while (s[i])
+// Check if string is a valid environment name
+// Return 0 if not otherwise size of the string
+int	is_valid_env(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str && str[len])
 	{
-		snew[i] = s[i];
-		i++;
+		if ((ft_isalpha(str[len]) || ft_isdigit(str[len]) || str[len] == '_'))
+		{
+			if (!len && ft_isdigit(str[len]))
+				return (0);
+			len++;
+		}
+		else
+			return (0);
 	}
-	snew[i] = '\0';
-	return (snew);
+	return (len);
 }

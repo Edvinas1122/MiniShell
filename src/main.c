@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:46:07 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/08 10:42:11 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/10 21:03:20 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	data = constructor(envp);
+	handle_parent_signals();
 	while (42)
 	{
 		line = readline("minishell> ");

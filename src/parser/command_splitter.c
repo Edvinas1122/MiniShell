@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 20:15:16 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/08 10:46:22 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/10 21:02:39 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	array_addback(char ***array, char *str)
 
 	if (!*array)
 	{
-		*array = ft_calloc(2, sizeof(char **));
+		*array = ft_calloc(2, sizeof(char *));
 		if (!*array)
 			return (0);
 		(*array)[0] = ft_strdup(str);

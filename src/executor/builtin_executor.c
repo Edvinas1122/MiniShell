@@ -6,7 +6,11 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:53:37 by cthien-h          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/07 17:18:05 by emomkus          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/09 15:42:42 by cthien-h         ###   ########.fr       */
+>>>>>>> 57f585a66ffcf0d2620c3bdf702f7d67a340aef5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +30,10 @@ static void	*get_builtin_function(char *command)
 	// 	return (&execute_export);
 	else if (!ft_strncmp(command, "unset", 6))
 		return (&execute_unset);
-	// else if (!ft_strncmp(command, "env", 4))
-	// 	return (&execute_env);
-	// else if (!ft_strncmp(command, "exit", 5))
-	// 	return (&execute_exit);
+	else if (!ft_strncmp(command, "env", 4))
+		return (&execute_env);
+	else if (!ft_strncmp(command, "exit", 5))
+		return (&execute_exit);
 	return (NULL);
 }
 

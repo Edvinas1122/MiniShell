@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_isnbr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/17 13:16:39 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/07 16:48:59 by cthien-h         ###   ########.fr       */
+/*   Created: 2022/04/09 15:40:01 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/09 15:41:18 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-/*
-* Dublicates string allocates and returns pointer to allocated dublicated str
-*/
-char	*ft_strdup(const char *s)
-{
-	char	*snew;
-	int		i;
+#include "utils.h"
 
-	if (!s)
-		return (NULL);
-	snew = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	i = 0;
-	while (s[i])
+// check if string is a valid number
+int	ft_isnbr(char *nptr)
+{
+	if (*nptr == '+' || *nptr == '-')
+		nptr++;
+	if (!*nptr)
+		return (0);
+	while (*nptr)
 	{
-		snew[i] = s[i];
-		i++;
+		if (!ft_isdigit(*nptr))
+			return (0);
+		nptr++;
 	}
-	snew[i] = '\0';
-	return (snew);
+	return (1);
 }

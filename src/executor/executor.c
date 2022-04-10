@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/08 10:43:35 by emomkus          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/08 04:55:22 by cthien-h         ###   ########.fr       */
+>>>>>>> 57f585a66ffcf0d2620c3bdf702f7d67a340aef5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +37,7 @@ static void	rotator(t_exec_data *exec_data)
 static void	set_in_fd(t_exec_data *exec_data, int fd)
 {
 	exec_data->pipe2[0] = fd;
+	exec_data->pipe1[0] = -1;
 }
 
 /* Sets output fd /is called only when last command/ */
