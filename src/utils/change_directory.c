@@ -6,25 +6,11 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:48:15 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/11 22:29:26 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/12 00:20:20 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
-// static void	relative_to_absolute(char dir)
-// {
-// 	char	*cwd;
-// 	char	*tmp;
-// 	char	*relative;
-// 	(void)data;
-
-// 	cwd = get_cwd();
-// 	tmp = ft_strjoin(cwd, "/");
-// 	relative = ft_strjoin(tmp, dir);
-// 	free(tmp);
-// 	free(cwd);
-// }
 
 static void	update_envp(t_envp_data envp_data)
 {
