@@ -6,7 +6,7 @@
 #    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/11 23:18:12 by cthien-h         ###   ########.fr        #
+#    Updated: 2022/04/12 00:16:22 by cthien-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,15 +64,17 @@ UTILS_DIR = src/utils/
 UTILS = $(addprefix $(UTILS_DIR),$(UTILS_SRC))
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
-.PHONY: all clean fclean re executor parser
+.PHONY: all clean fclean re parser
 
 #Main Compilation#
 all: $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT)
 	$(CC) $(FLAGS) $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT) -o $(NAME) -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 
+#Main compile#
 $(OBJ): $(FILES)
 	$(CC) $(FLAGS) -c $(FILES)
 
+#Executor compile#
 $(EXECUTOR_OBJ): $(EXECUTOR)
 	$(CC) $(FLAGS) -c $(EXECUTOR)
 
@@ -103,12 +105,12 @@ $(LIBFT):
 	make bonus -C $(LIBFT_DIR)
 
 clean:
-	rm -f $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(BUILTIN_OBJ)
+	rm -f $(OBJ) $(EXECUTOR_OBJ) $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(BUILTIN_OBJ)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean
 	rm -rf *.dSYM
-	rm -f $(EXECUTOR_TEST_NAME) $(PARSER_TEST_NAME)
+	rm -f $(PARSER_TEST_NAME)
 	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
