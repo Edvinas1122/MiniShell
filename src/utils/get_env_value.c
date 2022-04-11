@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 00:10:47 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/05 00:27:23 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/09 18:32:25 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_env_value(t_list *envp, char *env)
 		to_free = 1;
 	}
 	value_start = ft_strlen(env);
-	list = find_list(envp, env);
+	list = find_list(envp, env, 0);
 	if (to_free)
 		free(env);
 	if (!list)

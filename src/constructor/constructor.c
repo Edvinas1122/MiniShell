@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/07 16:22:04 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/09 18:32:44 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ static t_envp_data	initialise_envp(char **envp)
 	t_envp_data	envp_data;
 
 	envp_data.envp_cp = enviroment_list_con(envp);
-	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD");
+	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD=", 0);
+	envp_data.envp_empty = ft_calloc(1, sizeof(t_list *));
+	*envp_data.envp_empty = NULL;
 	envp_data.exit_status = 0;
 	return (envp_data);
 }
