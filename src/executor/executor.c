@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/11 19:35:00 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/11 22:58:09 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ void	executor(t_data *data)
 	exec_data.pipe_shift = 1;
 	current_command = *data->command.commands;
 	set_in_fd(&exec_data, data->command.input_fd);
-	while (current_command)
+	while (current_command && exit_status < 128)
 	{
-		if (exit_status == 130 || exit_status == 131)
-			break ;
 		if (current_command->next != NULL)
 			initiate_pipe(&exec_data);
 		else
@@ -74,4 +72,5 @@ void	executor(t_data *data)
 		current_command = current_command->next;
 		data->envp_data.exit_status = exit_status;
 	}
+	// TODO: close pipe if exit status > 128
 }
