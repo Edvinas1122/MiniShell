@@ -6,17 +6,56 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 18:48:15 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/08 10:40:15 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/11 22:05:30 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+// static void	relative_to_absolute(char dir)
+// {
+// 	char	*cwd;
+// 	char	*tmp;
+// 	char	*relative;
+// 	(void)data;
+
+// 	cwd = get_cwd();
+// 	tmp = ft_strjoin(cwd, "/");
+// 	relative = ft_strjoin(tmp, dir);
+// 	free(tmp);
+// 	free(cwd);
+// }
+
+static void	update_envp(t_envp_data envp_data)
+{
+	if (envp_data.pwd_list)
+	{
+		free(envp_data.pwd_list->content);
+		envp_data.pwd_list->content = NULL;
+		
+		envp_data.pwd_list->content = ft_strjoin("PWD=", envp_data.pwd);
+	}
+	if (envp_data.old_pwd_list) // set value if it's exist
+	{
+		free(envp_data.old_pwd_list->content);
+		envp_data.old_pwd_list->content = ft_strjoin("OLDPWD=", envp_data.old_pwd);
+	}
+}
+
 int	change_dir(t_data *data, char *dir)
 {
-	(void)data;
-	// free(data->envp_data.old_pwd);
-	// data->envp_data.old_pwd = data->envp_data.pwd;
-	// data->envp_data.pwd = dir;
-	return(chdir(dir));
+	char	*tmp;
+
+	if (chdir(dir) < 0)
+	{
+		perror(dir);
+		return (EXIT_FAILURE);
+	}
+	tmp = get_cwd();
+	if (data->envp_data.old_pwd)
+		free(data->envp_data.old_pwd);
+	data->envp_data.old_pwd = data->envp_data.pwd;
+	data->envp_data.pwd = tmp;
+	update_envp(data->envp_data);
+	return (EXIT_SUCCESS);
 }

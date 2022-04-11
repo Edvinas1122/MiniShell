@@ -42,6 +42,7 @@ typedef struct s_envp_data
 	t_list	**envp_cp;
 	t_list	**envp_empty;
 	t_list	*pwd_list;
+	t_list	*old_pwd_list;
 	char	*pwd;
 	char	*old_pwd;
 	char	*pwd_slink;

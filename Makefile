@@ -6,7 +6,7 @@
 #    By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/11 18:52:38 by emomkus          ###   ########.fr        #
+#    Updated: 2022/04/11 21:29:59 by emomkus          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ CONSTR = $(addprefix $(CONSTR_DIR),$(CONSTR_SRC))
 CONSTR_OBJ = $(CONSTR_SRC:.c=.o)
 
 #Builtin files#
-BUILTIN_SRC = echo.c unset.c env.c exit.c cd.c export.c
+BUILTIN_SRC = echo.c unset.c env.c exit.c cd.c export.c pwd.c
 BUILTIN_DIR = src/builtin/
 BUILTIN = $(addprefix $(BUILTIN_DIR),$(BUILTIN_SRC))
 BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
@@ -103,7 +103,7 @@ $(LIBFT):
 	make bonus -C $(LIBFT_DIR)
 
 clean:
-	rm -f $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ)
+	rm -f $(EXECUTOR_OBJ) $(EXECUTOR_TEST_OBJ) $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(BUILTIN_OBJ)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean

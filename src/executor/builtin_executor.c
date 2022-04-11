@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 16:53:37 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/11 18:50:30 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/11 21:07:21 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	*get_builtin_function(char *command)
 		return (&execute_echo);
 	else if (!ft_strncmp(command, "cd", 3))
 		return (&execute_cd);
-	// else if (!ft_strncmp(command, "pwd", 4))
-	// 	return (&execute_pwd);
+	else if (!ft_strncmp(command, "pwd", 4))
+		return (&execute_pwd);
 	else if (!ft_strncmp(command, "export", 7))
 		return (&execute_export);
 	else if (!ft_strncmp(command, "unset", 6))

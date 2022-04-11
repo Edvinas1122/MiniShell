@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/11 18:50:44 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/11 22:02:58 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,19 @@ static t_envp_data	initialise_envp(char **envp)
 	t_envp_data	envp_data;
 
 	envp_data.envp_cp = enviroment_list_con(envp);
-	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD=", 0);
 	envp_data.envp_empty = ft_calloc(1, sizeof(t_list *));
 	*envp_data.envp_empty = NULL;
+	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD=", 0);
+	if (!envp_data.pwd_list)
+		ft_lstadd_back(envp_data.envp_cp, ft_lstnew(get_cwd()));
+	envp_data.pwd = get_env_value(*envp_data.envp_cp, "PWD");
+	envp_data.old_pwd_list = find_list(*envp_data.envp_cp, "OLDPWD=", 0);
+	if (!envp_data.old_pwd_list)
+		ft_lstadd_back(envp_data.envp_empty, ft_lstnew(ft_strdup("OLDPWD")));
+	envp_data.old_pwd = NULL;
+	if (envp_data.old_pwd_list)
+		envp_data.old_pwd = get_env_value(*envp_data.envp_cp, "OLDPWD");
 	envp_data.exit_status = 0;
-	envp_data.pwd = get_cwd();
 	return (envp_data);
 }
 

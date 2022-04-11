@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 11:37:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/10 21:23:43 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/11 19:35:00 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,26 @@ void	executor(t_data *data)
 {
 	t_exec_data	exec_data;
 	t_list		*current_command;
-	t_command	command;
+	int			exit_status;
 
-	command = data->command;
+	exit_status = 0;
 	exec_data.pipe_shift = 1;
-	current_command = *command.commands;
-	set_in_fd(&exec_data, command.input_fd);
+	current_command = *data->command.commands;
+	set_in_fd(&exec_data, data->command.input_fd);
 	while (current_command)
 	{
+		if (exit_status == 130 || exit_status == 131)
+			break ;
 		if (current_command->next != NULL)
 			initiate_pipe(&exec_data);
 		else
-			set_out_fd(&exec_data, command.output_fd);
+			set_out_fd(&exec_data, data->command.output_fd);
 		if (!check_or_execute_builtin(data, &exec_data,
 				current_command->content))
-			data->envp_data.exit_status = fork_process(data, &exec_data,
-					current_command->content, command.paths);
+			exit_status = fork_process(data, &exec_data,
+					current_command->content, data->command.paths);
 		rotator(&exec_data);
 		current_command = current_command->next;
+		data->envp_data.exit_status = exit_status;
 	}
 }
