@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/11 18:51:21 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/11 23:20:16 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define UTILS_H
 
 # include "../minishell.h"
+
+typedef struct s_envp_data	t_envp_data;
 
 int		ft_isspace(int c);
 char	*str_remove_char_at(char *str, int idx);
@@ -33,5 +35,6 @@ int		ft_isnbr(char *nptr);
 char	*get_cwd(void);
 int		change_dir(t_data *data, char *dir);
 void	find_delete_list(t_list **list, char *match, void (*del)(void *));
+int		export_print_alone(t_envp_data envp_data);
 
 #endif

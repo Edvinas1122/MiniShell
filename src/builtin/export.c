@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:05:24 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/09 19:09:02 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/11 23:27:34 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,32 +71,13 @@ static int	set_env(t_envp_data envp_data, char *env)
 	return (1);
 }
 
-static int	print_env(t_envp_data envp_data)
-{
-	t_list	*list;
-
-	list = *envp_data.envp_cp;
-	while (list)
-	{
-		ft_putendl_fd(list->content, STDOUT_FILENO);
-		list = list->next;
-	}
-	list = *envp_data.envp_empty;
-	while (list)
-	{
-		ft_putendl_fd(list->content, STDOUT_FILENO);
-		list = list->next;
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	execute_export(t_data *data, char **argv)
 {
 	int	status;
 
 	status = EXIT_SUCCESS;
 	if (!argv[1])
-		return (print_env(data->envp_data));
+		return (export_print_alone(data->envp_data));
 	else
 	{
 		argv++;

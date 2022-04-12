@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 14:57:38 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/12 17:37:31 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/12 17:56:51 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	cd_to_home(t_data *data)
 	home_dir = get_env_value(*data->envp_data.envp_cp, "HOME");
 	if (home_dir[0] == '\0')
 	{
-		write(2, "HOME is not set\n", 16);
+		ft_putendl_fd("cd: HOME not set\n", STDERR_FILENO);
 		free(home_dir);
 		return (EXIT_FAILURE);
 	}
@@ -126,6 +126,5 @@ int	execute_cd(t_data *data, char **argv)
 		return (cd_to_home(data));
 	else
 		return (change_dir(data, argv[1]));
-	// print_cwd();
 	return (EXIT_SUCCESS);
 }
