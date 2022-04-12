@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_fd.c                                         :+:      :+:    :+:   */
+/*   close_pipes_signal.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 16:53:51 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/18 18:45:51 by emomkus          ###   ########.fr       */
+/*   Created: 2022/04/12 20:57:28 by cthien-h          #+#    #+#             */
+/*   Updated: 2022/04/12 20:57:44 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipes.h"
+#include "utils.h"
 
-int printfd(int	fd)
+void	close_pipes_signal(t_exec_data exec_data, int exit_status)
 {
-	char	buf[50];
-	int		i = 0;
-	int		ct = 49;
-
-	while (ct--)
+	if (exit_status > 128)
 	{
-		buf[i] = 0;
-		i++;
+		if (exec_data.pipe_shift == 0)
+			close(exec_data.pipe2[1]);
+		else
+			close(exec_data.pipe1[1]);
 	}
-	read(fd, buf, 49);
-	printf("%s\n", buf);
-	lseek(fd, 0, SEEK_SET);
-	return(0);
 }

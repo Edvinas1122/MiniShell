@@ -6,7 +6,7 @@
 #    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/12 00:16:22 by cthien-h         ###   ########.fr        #
+#    Updated: 2022/04/12 21:03:43 by cthien-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,8 @@ BUILTIN_OBJ = $(BUILTIN_SRC:.c=.o)
 UTILS_SRC = ft_isspace.c str_remove_char_at.c str_replace_str_at.c find_list.c \
 			is_meta_char.c char_array_len.c str_join_space.c free_array.c \
 			is_str_redir.c get_env_value.c dup2_and_close.c signals.c is_valid_env.c \
-			ft_isnbr.c change_directory.c get_cwd.c find_delete_list.c export_print_alone.c
+			ft_isnbr.c get_cwd.c find_delete_list.c export_print_alone.c \
+			close_pipes_signal.c
 UTILS_DIR = src/utils/
 UTILS = $(addprefix $(UTILS_DIR),$(UTILS_SRC))
 UTILS_OBJ = $(UTILS_SRC:.c=.o)

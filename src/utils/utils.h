@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 18:24:29 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/11 23:20:16 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/12 21:03:25 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../minishell.h"
 
 typedef struct s_envp_data	t_envp_data;
+typedef struct s_exec_data	t_exec_data;
 
 int		ft_isspace(int c);
 char	*str_remove_char_at(char *str, int idx);
@@ -33,8 +34,8 @@ void	handle_child_signals(void);
 int		is_valid_env(char *str);
 int		ft_isnbr(char *nptr);
 char	*get_cwd(void);
-int		change_dir(t_data *data, char *dir);
 void	find_delete_list(t_list **list, char *match, void (*del)(void *));
 int		export_print_alone(t_envp_data envp_data);
+void	close_pipes_signal(t_exec_data exec_data, int exit_status);
 
 #endif

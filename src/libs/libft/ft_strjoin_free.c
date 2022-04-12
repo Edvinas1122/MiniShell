@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 19:30:12 by emomkus           #+#    #+#             */
-/*   Updated: 2022/03/22 10:41:25 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/12 21:00:03 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ char	*ft_strjoin_free(char *s1, char *s2)
 		return (NULL);
 	ft_strlcpy(output, (char *)s1, len1);
 	ft_strlcat(output, (char *)s2, total_len);
-	//free(s1);
 	return (output);
 }
