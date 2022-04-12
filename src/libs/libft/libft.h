@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 05:43:19 by emomkus           #+#    #+#             */
-/*   Updated: 2022/01/25 19:46:20 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/12 18:29:03 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,5 @@ int			ft_isdigit(int c);
 int			ft_isalpha(int c);
 int			ft_atoi(const char *str);
 long int	ft_atol(const char *str);
+long long	ft_atoll(const char *str);
 #endif

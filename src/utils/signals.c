@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 04:32:08 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/11 19:13:01 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/12 18:48:42 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	handle_parent_signals(void)
 static void	child_signal_handler(int signal)
 {
 	if (signal == SIGQUIT)
-		ft_putstr_fd("Quit\n", 2);
+		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
 	else if (signal == SIGINT)
-		ft_putchar_fd('\n', 2);
+		ft_putchar_fd('\n', STDERR_FILENO);
 }
 
 // Register SIGINT and SIGQUIT handler for child process
