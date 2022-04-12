@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:07:59 by cthien-h          #+#    #+#             */
-/*   Updated: 2022/04/12 18:35:13 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/12 20:52:58 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ static void	exit_with_arg(char *arg)
 {
 	int	status;
 
-	if (ft_isnbr(arg)
-		&& ft_atoll(arg) <= INT64_MAX && ft_atoll(arg) >= INT64_MIN)
+	if (ft_isnbr(arg) && ft_strlen(arg) < 19)
 	{
 		ft_putendl_fd("exit", 2);
 		status = ft_atoll(arg);
