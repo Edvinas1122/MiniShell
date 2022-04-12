@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:28:35 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/05 18:24:12 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/12 20:42:16 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*path_string_command(char **paths, char *cmd)
 
 	check = -1;
 	i = 0;
-	while (paths[i])
+	while (paths && paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/");
 		path = ft_strjoin(tmp, cmd);
