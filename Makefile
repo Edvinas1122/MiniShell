@@ -6,7 +6,7 @@
 #    By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/14 15:05:55 by emomkus           #+#    #+#              #
-#    Updated: 2022/04/12 21:03:43 by cthien-h         ###   ########.fr        #
+#    Updated: 2022/04/12 21:10:35 by cthien-h         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,6 @@ PARSER_DIR = src/parser/
 PARSER = $(addprefix $(PARSER_DIR),$(PARSER_SRC))
 PARSER_OBJ = $(PARSER_SRC:.c=.o)
 
-#Parser test files#
-PARSER_TEST_SRC = parser_test.c
-PARSER_TEST_DIR = src/parser/test/
-PARSER_TEST = $(addprefix $(PARSER_TEST_DIR),$(PARSER_TEST_SRC))
-PARSER_TEST_OBJ = $(PARSER_TEST_SRC:.c=.o)
-PARSER_TEST_NAME = parser-test.out
-
 #Constructor files#
 CONSTR_SRC = constructor.c deconstructor.c
 CONSTR_DIR = src/constructor/
@@ -65,7 +58,7 @@ UTILS_DIR = src/utils/
 UTILS = $(addprefix $(UTILS_DIR),$(UTILS_SRC))
 UTILS_OBJ = $(UTILS_SRC:.c=.o)
 
-.PHONY: all clean fclean re parser
+.PHONY: all clean fclean re
 
 #Main Compilation#
 all: $(CONSTR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(BUILTIN_OBJ) $(EXECUTOR_OBJ) $(OBJ) $(LIBFT)
@@ -79,15 +72,9 @@ $(OBJ): $(FILES)
 $(EXECUTOR_OBJ): $(EXECUTOR)
 	$(CC) $(FLAGS) -c $(EXECUTOR)
 
-#Parser test compile#
-parser:  $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(LIBFT)
-	$(CC) $(FLAGS) $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(LIBFT) -o $(PARSER_TEST_NAME) -lreadline
-
+#Parser compile#
 $(PARSER_OBJ): $(PARSER)
 	$(CC) $(FLAGS) -c $(PARSER)
-
-$(PARSER_TEST_OBJ): $(PARSER_TEST)
-	$(CC) $(FLAGS) -c $(PARSER_TEST)
 
 #Utils compile#
 $(UTILS_OBJ): $(UTILS)
@@ -106,12 +93,11 @@ $(LIBFT):
 	make bonus -C $(LIBFT_DIR)
 
 clean:
-	rm -f $(OBJ) $(EXECUTOR_OBJ) $(PARSER_OBJ) $(PARSER_TEST_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(BUILTIN_OBJ)
+	rm -f $(OBJ) $(EXECUTOR_OBJ) $(PARSER_OBJ) $(UTILS_OBJ) $(CONSTR_OBJ) $(BUILTIN_OBJ)
 	make clean -C $(LIBFT_DIR)
 
 fclean: clean
 	rm -rf *.dSYM
-	rm -f $(PARSER_TEST_NAME)
 	make fclean -C $(LIBFT_DIR)
 
 re: fclean all
