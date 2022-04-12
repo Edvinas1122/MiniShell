@@ -6,7 +6,7 @@
 /*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 18:58:57 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/11 19:38:17 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/12 17:53:47 by emomkus          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	execute_command(char **cmd_arr, char **paths, char **envp)
 	execute = accessor_con(cmd_arr, paths);
 	if (!execute.path_cmd)
 	{
-		ft_putstr_fd(cmd_arr[0], 2);
-		ft_putendl_fd(": command not found", 2);
+		ft_putstr_fd(cmd_arr[0], STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
 	}
 	else
 	{
@@ -68,6 +68,22 @@ static void	close_pipe(t_exec_data *exec_data)
 	}
 }
 
+static char	**list_to_array(t_list *list)
+{
+	char	**array;
+	int		i;
+
+	array = ft_calloc(ft_lstsize(list) + 1, sizeof(char *));
+	i = 0;
+	while (list)
+	{
+		array[i] = list->content;
+		list = list->next;
+		i++;
+	}
+	return (array);
+}
+
 /* As a child process checks access & executes command
 	It calls accessor object.
 	*/
@@ -83,7 +99,8 @@ int	fork_process(t_data *data, t_exec_data *exec_data,
 	if (pid == 0)
 	{
 		dup_pipe(exec_data);
-		execute_command(cmd_arr, paths, NULL);
+		execute_command(cmd_arr, paths,
+			list_to_array(*data->envp_data.envp_cp));
 		exit(127);
 	}
 	close_pipe(exec_data);
