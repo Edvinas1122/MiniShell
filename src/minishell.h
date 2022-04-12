@@ -6,7 +6,7 @@
 /*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:42:37 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/11 23:27:58 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/04/12 21:20:31 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_envp_data
 	t_list	*old_pwd_list;
 	char	*pwd;
 	char	*old_pwd;
-	char	*pwd_slink;
 	int		exit_status;
 }				t_envp_data;
 
