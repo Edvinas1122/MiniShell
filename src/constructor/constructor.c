@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constructor.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emomkus <emomkus@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:51:44 by emomkus           #+#    #+#             */
-/*   Updated: 2022/04/11 22:02:58 by emomkus          ###   ########.fr       */
+/*   Updated: 2022/04/12 17:43:05 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,16 @@ static t_list	**enviroment_list_con(char **envp)
 static t_envp_data	initialise_envp(char **envp)
 {
 	t_envp_data	envp_data;
+	char		*pwd;
 
 	envp_data.envp_cp = enviroment_list_con(envp);
 	envp_data.envp_empty = ft_calloc(1, sizeof(t_list *));
 	*envp_data.envp_empty = NULL;
 	envp_data.pwd_list = find_list(*envp_data.envp_cp, "PWD=", 0);
+	pwd = get_cwd();
 	if (!envp_data.pwd_list)
-		ft_lstadd_back(envp_data.envp_cp, ft_lstnew(get_cwd()));
+		ft_lstadd_back(envp_data.envp_cp, ft_lstnew(ft_strjoin("PWD=", pwd)));
+	free(pwd);
 	envp_data.pwd = get_env_value(*envp_data.envp_cp, "PWD");
 	envp_data.old_pwd_list = find_list(*envp_data.envp_cp, "OLDPWD=", 0);
 	if (!envp_data.old_pwd_list)
